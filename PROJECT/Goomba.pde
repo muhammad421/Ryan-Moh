@@ -14,13 +14,7 @@ class Goomba{
     goomY = int ((height - (2*tileHeight))- 3*tileHeight);
     goomWalk = true;
     goomDirection = 1;
-    String lines[] = loadStrings(levelToLoad);
 
-    tilesHigh = lines.length;
-    tilesWide = lines[0].length();
-
-    tileWidth = width/tilesWide;
-    tileHeight = height/tilesHigh;
     goomSpawn = true;
     jumpSpeed = 0;
     fallSpeed = 0;
@@ -48,6 +42,10 @@ class Goomba{
     }
   }
   
+  void test(Mario theCharacter){
+    println(theCharacter.x);
+    
+  }
 //allows interaction with the grid from the goomba
   void grid() {
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight)+1]!='#'){
@@ -118,23 +116,5 @@ class Goomba{
   }
   
  //loads the level to interact with goomba 
-  void loadLevel(){
-  
-  levelToLoad = "levels/"+n+".txt";
-  String lines[] = loadStrings(levelToLoad);
 
-  tilesHigh = lines.length;
-  tilesWide = lines[0].length();
-
-  tileWidth = width/tilesWide;
-  tileHeight = height/tilesHigh;
-  tiles = new char[tilesWide+10][tilesHigh+10];
-  
-  for (int y = 0; y < tilesHigh; y++) {
-    for (int x = 0; x < tilesWide; x++) {
-      char tileType = lines[y].charAt(x);
-      tiles[x][y] = tileType;
-    }
-  }
-    }
 }

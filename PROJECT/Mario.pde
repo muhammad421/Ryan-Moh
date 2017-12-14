@@ -1,8 +1,8 @@
-class Mario extends Goomba {
+class Mario {
   //Image
   PImage p1, p2, p3;
   //How big is he
-  float y, tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed;
+  float y, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed;
   //Moving Mario
   int tilesHigh, tilesWide, x, n,counter;
   boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft,canGoLeft,canGoRight,canJump;
@@ -12,13 +12,7 @@ class Mario extends Goomba {
     p1 = loadImage("p1.png");
     p2 = loadImage("p2.png");
     p3 = loadImage("p3.png");
-    String lines[] = loadStrings(levelToLoad);
-
-    tilesHigh = lines.length;
-    tilesWide = lines[0].length();
-
-    tileWidth = width/tilesWide;
-    tileHeight = height/tilesHigh;
+   
     falling = false;
     jumping = false;
     jumpSpeed = 0;
@@ -45,7 +39,6 @@ class Mario extends Goomba {
 
 //Moves Mario
   void move() {
-    loadLevel();
     textSize(32);
     fill(0);
     text(counter,32,32);
@@ -194,22 +187,5 @@ class Mario extends Goomba {
   }
   
   //Loads text file
-  void loadLevel(){
-  
-  levelToLoad = "levels/"+n+".txt";
-  String lines[] = loadStrings(levelToLoad);
 
-  tilesHigh = lines.length;
-  tilesWide = lines[0].length();
-
-  tileWidth = width/tilesWide;
-  tileHeight = height/tilesHigh;
-  tiles = new char[tilesWide+10][tilesHigh+10];
-  for (int y = 0; y < tilesHigh; y++) {
-    for (int x = 0; x < tilesWide; x++) {
-      char tileType = lines[y].charAt(x);
-      tiles[x][y] = tileType;
-    }
-  }
-  }
 }
