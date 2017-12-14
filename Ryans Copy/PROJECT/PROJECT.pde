@@ -54,6 +54,11 @@ void setup() {
 
 void draw() {
   if (state == 0) {
+      for (int y = 0; y < tilesHigh; y++) {
+    for (int x = 0; x < tilesWide; x++) {
+    showTile(tiles[x][y], x, y);
+    }
+      }
   homeScreen.menu();
  // mainScreen();
   }
@@ -191,7 +196,7 @@ void loadImages() {
   levelBackground = loadImage(bgImage);
 
   //load tile images
-  platform = loadImage("platform.png");
+  platform = loadImage("brick.jpg");
   coin = loadImage("coin.png");
   box = loadImage("box.jpg");
   goomba = loadImage("goomba.png");

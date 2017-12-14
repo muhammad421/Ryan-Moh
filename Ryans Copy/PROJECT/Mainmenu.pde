@@ -1,14 +1,15 @@
 class Mainmenu {
-  PImage mainScreen, shroom, brick;
-  int shroomX, shroomY;
+  PImage mainScreen, shroom, bricks;
+  int shroomX, shroomY ;
   int shroomLocation;
   Mainmenu() {
     mainScreen = loadImage("mainscreen.jpg");
     shroom = loadImage("lilshroom.png");
-    brick = loadImage("brick.jpg");
+    bricks = loadImage("bricks.jpg");
     shroomLocation = 1;
-    shroomX = 510;
+    shroomX = 200;
     shroomY = 417;
+
   }
   void menu() {
     keypressed();
@@ -16,6 +17,8 @@ class Mainmenu {
 
     image(mainScreen, 0, 0, width, height); 
     image(shroom, shroomX, shroomY, 35, 35);
+
+    image(bricks,0,665,width,35);
 
   }
   void keypressed() {
