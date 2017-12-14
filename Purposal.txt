@@ -1,0 +1,24 @@
+Ryan and I will be working on a past project. The project is a Mario platformer. So far we are able to get our characters ineteracting with the 
+grid and, we are able to use text files to edit our levels. Our first priority is to have the characters interact with one another. Than we will
+work on making it so that it will look like traditional mario, with the "camera" following mario. After that we will work on making the levels.
+And finally we will make it so that the graphics look better and it doesn't look so "blocky". If we have time we will add more enemy characters,
+such as Yoshi, the flower, etc. and maybe add a multiplayer. And if we STILL have time we will add power ups, like the mushroom, and flower power.
+
+<<<<<<< HEAD
+Things to Work on/fix:
+
+
+=======
+=====Essential Things======
+Getting the Characters to collide
+Be able to collect coins
+Have the camera follow mario
+
+
+
+=====Nice Things To Have=====
+Better Graphics
+Extra Characters
+Power Ups
+Multiplayer
+>>>>>>> 10e4934e9c9ff294075b5339d44376b7bf93f85b
