@@ -1,4 +1,4 @@
-class Mario extends Goomba{
+class Mario extends Goomba {
   //Image
   PImage p1, p2, p3;
   //How big is he

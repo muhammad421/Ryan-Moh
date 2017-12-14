@@ -1,125 +1,170 @@
+//WMCI COMPSCI 20
+//Dec 5th 2017
+//MARIO PLATFORMER
+//Muhammad Haris && Ryan McMurtry
+//Muhammad did the Mario Object
+//Ryan did the Goomba Object
+//We collectivly did the colliding with grid and text files
+//Only thing that needs to be fixed is having it so that when your on a coin the coin stays off the screen
+
 char[][] tiles;
 PImage levelBackground;
 PImage platform, coin, box, goomba, p1, slime, empty, p2, p3, cloud;
-int tilesHigh, tilesWide, x, y, n, newY;
+int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
 boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft;
+//import processing.sound.*;
+//SoundFile music;
+boolean gpaused;
 
+int state = 0;
+float w = 150;
+float h = 80;
+float buttX;
+float buttY;
+
+float buttX2;
+float buttY2;
+
+Goomba goomba1;
+Mario mario;
+
+//Sets background and calls on the mario and goomba functions
 void setup() {
   size(720, 700);  
   bgImage = "level_background.png";
 
+  buttX = width/2-75;
+  buttY = height/2-40;
+  buttY2 = height/2+150;
+  buttX2 =width/2-75;
+  gpaused = false;
+
+  //music = new SoundFile(this, "music.mp3");
+  //music.loop();
+
   initializeValues();
-  y= int (height - 2*tileHeight);
+  mario = new Mario();
+  goomba1 = new Goomba();
 }
+
+//Moves mario and the Goomba and checks to see what they are colliding with on the grid
 
 void draw() {
-  display();
-  mario();
-  collidingWithGrid();
-}
+  if (state == 0) {
+    mainScreen();
+  }
+  if (state == 2) {
+    dead();
+  }
+  if (state == 3){
+   instructions(); 
+  }
+  if ((state == 1)&& (gpaused == false)) {
+    display();
 
-void mario() {
-  //mario moving
-  if (marioUp == true) {
-    jumping = true;
+    mario.move();
+    mario.collidingWithGrid();
+
+
+    goomba1.grid();
+    goomba1.enemy();
   }
-  if (jumping == true) {
-    jump();
-  }
-  if (marioLeft == true) {
-    x+=tileWidth/2;
-    walking();
-  }
-  if (marioRight == true) {
-    x-=tileWidth/2;
-    walking();
-  }
-  // next level
-  if (x>width) {
-    n++;
-    x=0;
-  } else if (x<0&&(n!=0)) {
-    n--;
-    x=(width);
-  } else if (y>height) {
-    y=0;
-  } else if (y<0) {
-    y=int(height-2*tileWidth);
-  } else if (n == 3) {
-    n = 0;
-  } else if (  x<0 && (n==0)) {
-    x = width;
-  }
-  //Walking on brick
-  if (isWalking == false) {
-    image(p3, x, y, tileWidth, tileHeight);
-  } else {
-    image(p2, x, y, tileWidth, tileHeight);
+  if ((gpaused == true)&& (state == 1)) {
+    pause();
   }
 }
 
-void walking() {
-  if (millis() > lastMove + delay) {
-    isWalking = !isWalking;
-    lastMove = millis();
-  }
-}
+//moves Mario
+void keyPressed() {
+  mario.keypressed();
+    if (key == 'p' || key == 'P') {
 
-void initializeValues() {
-  falling = false;
-  jumping = false;
-  jumpSpeed = 0;
-  fallSpeed = 0;
-  marioUp = false;
-  marioLeft = false;
-  marioRight = false;
-  gravity = 5;
-
-  x =0;
-  newY = 0;
-  n=0;
-  isWalking = false;
-  isMoving =false;
-  onGround = true;
-  canIJump = true;
-  loadImages();
-  delay = 100;
-  lastMove = millis();
-  levelToLoad = "levels/"+n+".txt";
-  //load level data
-  String lines[] = loadStrings(levelToLoad);
-
-  tilesHigh = lines.length;
-  tilesWide = lines[0].length();
-
-  tileWidth = width/tilesWide;
-  tileHeight = height/tilesHigh;
-
-  //println(tilesHigh, tilesWide);
-
-  tiles = new char[tilesWide+10][tilesHigh+10];
-
-  //put values into 2d array of characters
-  for (int y = 0; y < tilesHigh; y++) {
-    for (int x = 0; x < tilesWide; x++) {
-      char tileType = lines[y].charAt(x);
-      tiles[x][y] = tileType;
+    gpaused = !gpaused;
+      
+    if (state == 3){
+     state = 0; 
     }
   }
 }
 
+void keyReleased() {
+  mario.keyreleased();
+}
+
+//loads all the images used 
+void initializeValues() {
+  loadImages();
+}
+
+void pause() {
+  fill(200, 200, 200, 1);
+  rect(0, 0, width, height);
+  fill(0);
+  text("Paused", width/2-70, height/2);
+    text("Press P to unpause", width/2-150, height/2+100);
+  
+}
+
+//Instruction screen
+void instructions(){
+  background(255);
+  fill(0);
+  rect(100,100,width-200,height-200);
+  fill(255);
+  text("Controls", 300,200);
+  textSize(20);
+  text("WASD - to move", 150, 250);
+  text("P - pause and unpause and go back",150, 300);
+  textSize(32);
+}
+
+//Pause and start screen
+void mainScreen() {
+
+  if (state == 0) {
+  image(levelBackground, 0, 0, width, height);
+    fill(0);
+    text("Super Moria", width/2-120, height/2-100);
+    rect(buttX, buttY, w, h);
+    rect(buttX2, buttY2,w,h);
+    fill(255);
+    textSize(40);
+    text("Start", width/2-45, height/2);
+    textSize(30);
+    text("Instruction", width/2-80, height/2+190);
+
+    if (mousePressed) {
+      if (mouseX>buttX && mouseX <buttX+w && mouseY>buttY && mouseY <buttY+h) {
+        state = 1;
+      }
+      if (mouseX>buttX2 && mouseX <buttX2+w && mouseY>buttY2 && mouseY <buttY2+h) {
+        state = 3;
+      }
+    }
+  }
+}
+
+void dead(){
+  background(0);
+  text("you dead", width/2-100, height/2);
+  
+}
+
+//displays the background and places all the blocks
 void display() {
   image(levelBackground, 0, 0, width, height);
 
   for (int y = 0; y < tilesHigh; y++) {
     for (int x = 0; x < tilesWide; x++) {
       showTile(tiles[x][y], x, y);
+
     }
   }
 }
 
+//assignes symbols to pictures
 void showTile(char location, int x, int y) {
   if (location == '#') {
     image(platform, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
@@ -133,21 +178,12 @@ void showTile(char location, int x, int y) {
     image(p1, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'S') {
     image(slime, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+  } else if (location == '.') {
+    image(empty, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   }
 }
 
-void collidingWithGrid() {
-  if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='#'&&((y/tileHeight)+1)!=19) {
-    falling = false;
-    jumping = false;
-    newY = y;
-  } else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#'&&((y/tileHeight)+1)!=19) {
-    y += 2*gravity;
-  } else if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
-  } else if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]!='#') {
-  }
-}
-
+//loads Images
 void loadImages() {
   //load background
   levelBackground = loadImage(bgImage);
@@ -157,56 +193,7 @@ void loadImages() {
   coin = loadImage("coin.png");
   box = loadImage("box.jpg");
   goomba = loadImage("goomba.png");
-  p1 = loadImage("p1.png");
-  p2 = loadImage("p2.png");
-  p3 = loadImage("p3.png");
   slime = loadImage("slime.png");
   cloud = loadImage("cloud.png");
-}
-void jump() {
-  y -=tileHeight;
-  if ((y-tileHeight)<y) {
-    falling = true;
-  }
-  if (falling == true) {
-    gravity();
-  }
-}
-void gravity() {
-  y =int( y + jumpSpeed);
-  jumpSpeed = jumpSpeed + gravity;
-  if (y >=630) {
-    jumping = false;
-    falling = false;
-    jumpSpeed = 0;
-    y = 630;
-
-  }
-  //if (y != 630){
-  //  y= newY;
-  //}
-}
-void keyPressed() {
-
-  if (key == 'w' || key == 'W') {
-    marioUp = true;
-  } 
-  if (key== 'a' || key=='A') {
-    marioRight = true;
-  }  
-  if (key== 'd' || key=='D') {
-    marioLeft = true;
-  }
-}
-void keyReleased() {
-
-  if (key == 'w' || key == 'W') {
-    marioUp = false;
-  } 
-  if (key== 'a' || key=='A') {
-    marioRight = false;
-  }
-  if (key== 'd' || key=='D') {
-    marioLeft = false;
-  }
+  empty = loadImage("empty.png");
 }
