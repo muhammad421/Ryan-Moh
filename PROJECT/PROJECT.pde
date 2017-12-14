@@ -29,6 +29,7 @@ float buttY2;
 
 Goomba goomba1;
 Mario mario;
+LoadLevel level;
 
 //Sets background and calls on the mario and goomba functions
 void setup() {
@@ -47,6 +48,7 @@ void setup() {
   initializeValues();
   mario = new Mario();
   goomba1 = new Goomba();
+  level = new LoadLevel();
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
@@ -70,6 +72,9 @@ void draw() {
 
     goomba1.grid();
     goomba1.enemy();
+    goomba1.test(mario);
+    
+    level.test(mario);
   }
   if ((gpaused == true)&& (state == 1)) {
     pause();
@@ -96,6 +101,8 @@ void keyReleased() {
 //loads all the images used 
 void initializeValues() {
   loadImages();
+  loadLevel();
+
 }
 
 void pause() {
@@ -197,3 +204,23 @@ void loadImages() {
   cloud = loadImage("cloud.png");
   empty = loadImage("empty.png");
 }
+  void loadLevel(){
+  
+  levelToLoad = "levels/1.txt";
+  String lines[] = loadStrings(levelToLoad);
+
+  tilesHigh = lines.length;
+  tilesWide = lines[0].length();
+
+  tileWidth = width/tilesWide;
+  tileHeight = height/tilesHigh;
+  tiles = new char[tilesWide+10][tilesHigh+10];
+  for (int y = 0; y < tilesHigh; y++) {
+    for (int x = 0; x < tilesWide; x++) {
+      char tileType = lines[y].charAt(x);
+      tiles[x][y] = tileType;
+    }
+  }
+    tileWidth = width/tilesWide;
+    tileHeight = height/tilesHigh;
+  }
