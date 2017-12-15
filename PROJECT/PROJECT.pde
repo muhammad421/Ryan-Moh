@@ -30,7 +30,7 @@ float buttY2;
 Goomba goomba1;
 Mario mario;
 LoadLevel level;
-
+Mainmenu homeScreen;
 //Sets background and calls on the mario and goomba functions
 void setup() {
   size(720, 700);  
@@ -49,13 +49,14 @@ void setup() {
   mario = new Mario();
   goomba1 = new Goomba();
   level = new LoadLevel();
+    homeScreen = new Mainmenu();
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
 
 void draw() {
   if (state == 0) {
-    mainScreen();
+  homeScreen.menu();
   }
   if (state == 2) {
     dead();

@@ -32,7 +32,7 @@ class Mario {
     canGoLeft = true;
     canGoRight = true;
     canJump = true;
-    delay = 100;
+    delay = 150;
     lastMove = millis();
     y= int (height - 2*tileHeight);
   }
@@ -57,11 +57,11 @@ class Mario {
       jump();
     }
     if (marioLeft == true&&canGoLeft == true) {
-      x+=tileWidth;
+      x+=tileWidth/2;
       walking();
     }
     if (marioRight == true&&canGoRight == true) {
-      x-=tileWidth;
+      x-=tileWidth/2;
       walking();
     }
     //Goes to next Level if off screen
