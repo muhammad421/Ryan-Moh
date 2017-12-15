@@ -127,13 +127,7 @@ class Mario {
       canGoRight = true;
     }
     }
-    //***TRYING TO COLLIDE WITH GOOMBA***
-    //theGoomba.grid(goomX);
-    //theGoomba.gravity(goomY);
-    //println(goomX,goomY);
-    //if (goomX == x && goomY == y){
-    //  println("yes");
-    //}
+
   }
 
 //Allows you to jump

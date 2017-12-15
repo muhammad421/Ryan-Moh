@@ -29,8 +29,8 @@ float buttY2;
 
 Goomba goomba1;
 Mario mario;
-LoadLevel level;
 Mainmenu homeScreen;
+Coin mCoin;
 //Sets background and calls on the mario and goomba functions
 void setup() {
   size(720, 700);  
@@ -48,21 +48,22 @@ void setup() {
   initializeValues();
   mario = new Mario();
   goomba1 = new Goomba();
-  level = new LoadLevel();
-    homeScreen = new Mainmenu();
+  homeScreen = new Mainmenu();
+  mCoin = new Coin();
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
 
 void draw() {
+loadLevel(mario.n);
   if (state == 0) {
-  homeScreen.menu();
+    homeScreen.menu();
   }
   if (state == 2) {
     dead();
   }
-  if (state == 3){
-   instructions(); 
+  if (state == 3) {
+    instructions();
   }
   if ((state == 1)&& (gpaused == false)) {
     display();
@@ -75,7 +76,9 @@ void draw() {
     goomba1.enemy();
     goomba1.test(mario);
     
-    level.test(mario);
+    
+    
+    
   }
   if ((gpaused == true)&& (state == 1)) {
     pause();
@@ -85,12 +88,12 @@ void draw() {
 //moves Mario
 void keyPressed() {
   mario.keypressed();
-    if (key == 'p' || key == 'P') {
+  if (key == 'p' || key == 'P') {
 
     gpaused = !gpaused;
-      
-    if (state == 3){
-     state = 0; 
+
+    if (state == 3) {
+      state = 0;
     }
   }
 }
@@ -102,8 +105,6 @@ void keyReleased() {
 //loads all the images used 
 void initializeValues() {
   loadImages();
-  loadLevel();
-
 }
 
 void pause() {
@@ -111,20 +112,19 @@ void pause() {
   rect(0, 0, width, height);
   fill(0);
   text("Paused", width/2-70, height/2);
-    text("Press P to unpause", width/2-150, height/2+100);
-  
+  text("Press P to unpause", width/2-150, height/2+100);
 }
 
 //Instruction screen
-void instructions(){
+void instructions() {
   background(255);
   fill(0);
-  rect(100,100,width-200,height-200);
+  rect(100, 100, width-200, height-200);
   fill(255);
-  text("Controls", 300,200);
+  text("Controls", 300, 200);
   textSize(20);
   text("WASD - to move", 150, 250);
-  text("P - pause and unpause and go back",150, 300);
+  text("P - pause and unpause and go back", 150, 300);
   textSize(32);
 }
 
@@ -132,11 +132,11 @@ void instructions(){
 void mainScreen() {
 
   if (state == 0) {
-  image(levelBackground, 0, 0, width, height);
+    image(levelBackground, 0, 0, width, height);
     fill(0);
     text("Super Moria", width/2-120, height/2-100);
     rect(buttX, buttY, w, h);
-    rect(buttX2, buttY2,w,h);
+    rect(buttX2, buttY2, w, h);
     fill(255);
     textSize(40);
     text("Start", width/2-45, height/2);
@@ -154,10 +154,9 @@ void mainScreen() {
   }
 }
 
-void dead(){
+void dead() {
   background(0);
   text("you dead", width/2-100, height/2);
-  
 }
 
 //displays the background and places all the blocks
@@ -167,18 +166,20 @@ void display() {
   for (int y = 0; y < tilesHigh; y++) {
     for (int x = 0; x < tilesWide; x++) {
       showTile(tiles[x][y], x, y);
-
     }
   }
 }
 
 //assignes symbols to pictures
 void showTile(char location, int x, int y) {
+  mCoin.showTile(mario,location, x, y);
   if (location == '#') {
     image(platform, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  } else if (location == 'C') {
-    image(coin, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  } else if (location == 'B') {
+  } 
+  else if (location == 'C') {
+    image(empty, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+  }
+  else if (location == 'B') {
     image(box, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'F') {
     image(goomba, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
@@ -205,9 +206,10 @@ void loadImages() {
   cloud = loadImage("cloud.png");
   empty = loadImage("empty.png");
 }
-  void loadLevel(){
-  
-  levelToLoad = "levels/1.txt";
+
+//Loading Levels
+void loadLevel(int n) {
+  levelToLoad = "levels/"+n+".txt";
   String lines[] = loadStrings(levelToLoad);
 
   tilesHigh = lines.length;
@@ -222,6 +224,6 @@ void loadImages() {
       tiles[x][y] = tileType;
     }
   }
-    tileWidth = width/tilesWide;
-    tileHeight = height/tilesHigh;
-  }
+  tileWidth = width/tilesWide;
+  tileHeight = height/tilesHigh;
+}

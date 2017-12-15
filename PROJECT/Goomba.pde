@@ -9,7 +9,6 @@ class Goomba{
   PImage goomba2, goomba;
 
   Goomba() {
-    loadLevel();
     goomX = 600;
     goomY = int ((height - (2*tileHeight))- 3*tileHeight);
     goomWalk = true;
