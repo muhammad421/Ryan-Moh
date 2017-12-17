@@ -42,7 +42,7 @@ class Goomba{
   }
   
   void test(Mario theCharacter){
-    println(theCharacter.x);
+    //println(theCharacter.x);
     
   }
 //allows interaction with the grid from the goomba

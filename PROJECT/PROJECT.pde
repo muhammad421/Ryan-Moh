@@ -105,6 +105,7 @@ void keyReleased() {
 //loads all the images used 
 void initializeValues() {
   loadImages();
+
 }
 
 void pause() {
@@ -168,6 +169,14 @@ void display() {
       showTile(tiles[x][y], x, y);
     }
   }
+      for (int i =0; i<tilesHigh; i++){
+    for(int o =0; o<tilesWide; o++){
+      if (tiles[i][o] == 'C'){
+        println(tiles[i][o]);
+      }
+    }
+  }
+
 }
 
 //assignes symbols to pictures
