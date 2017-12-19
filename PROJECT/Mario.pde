@@ -39,14 +39,14 @@ class Mario {
 
 //Moves Mario
   void move() {
-    textSize(32);
-    fill(0);
-    text(counter,32,32);
-    //Detects if your on a coin ***NEEDS TO BE WORKED ON***
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)]=='C') {
-       tiles[int(x/tileWidth)][int(y/tileHeight)]='.';
-       counter++;
-    }
+    //textSize(32);
+    //fill(0);
+    //text(counter,32,32);
+    ////Detects if your on a coin ***NEEDS TO BE WORKED ON***
+    //if (tiles[int(x/tileWidth)][int(y/tileHeight)]=='C') {
+    //   tiles[int(x/tileWidth)][int(y/tileHeight)]='.';
+    //   counter++;
+    //}
 
 
     //mario moving

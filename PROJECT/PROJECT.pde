@@ -46,16 +46,19 @@ void setup() {
   //music.loop();
 
   initializeValues();
+  
   mario = new Mario();
   goomba1 = new Goomba();
   homeScreen = new Mainmenu();
   mCoin = new Coin();
+  loadLevel(mario.n);
+
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
 
 void draw() {
-loadLevel(mario.n);
+//loadLevel(mario.n);
   if (state == 0) {
     homeScreen.menu();
   }
@@ -169,25 +172,18 @@ void display() {
       showTile(tiles[x][y], x, y);
     }
   }
-      for (int i =0; i<tilesHigh; i++){
-    for(int o =0; o<tilesWide; o++){
-      if (tiles[i][o] == 'C'){
-        println(tiles[i][o]);
-      }
-    }
-  }
 
 }
 
 //assignes symbols to pictures
 void showTile(char location, int x, int y) {
-  mCoin.showTile(mario,location, x, y);
+  mCoin.onCoin(mario,location, x, y);
   if (location == '#') {
     image(platform, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } 
-  else if (location == 'C') {
-    image(empty, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  }
+    else if (location == 'C') {
+    image(coin, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+  } 
   else if (location == 'B') {
     image(box, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'F') {
