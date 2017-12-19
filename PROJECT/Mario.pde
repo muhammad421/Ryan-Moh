@@ -80,11 +80,14 @@ class Mario {
     if (x >= width) {
       n++;
       x= 10;
+      loadLevel(n);
     } else if (x <=0&&n!=0) {
       n--;
       x = width -10;
+      loadLevel(n);
     } else if ( n == 3) {
       n = 0;
+      loadLevel(n);
     } else if ( n == 0&& x < 0) {
       x = width -10;
     }
