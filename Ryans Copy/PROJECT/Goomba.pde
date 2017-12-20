@@ -29,9 +29,9 @@ class Goomba{
     for (int y = 0; y < tilesHigh; y++) {
       for (int x = 0; x < tilesWide; x++) {
         if (tiles[x][y]=='!') {
-    
-            goomX = x*width/tilesWide;
-            goomY = y*height/tilesHigh;
+      println("sadasd");
+            goomX = x * width/tilesWide;
+            goomY = y * width/tilesHigh;
 
 
             tiles[x][y] = '.';

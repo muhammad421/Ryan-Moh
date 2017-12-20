@@ -2,8 +2,7 @@ class LevelEditor {
   int [][] board;
   int cols, rows, cellWidth, cellHeight;
   boolean clicked;
-  
-  
+
   LevelEditor() {
     cols = 20;
     rows = 20;
@@ -13,6 +12,12 @@ class LevelEditor {
   }
 
   void makeGrid() {
+String words = "dog";
+String[] list = split(words, ' ');   
+saveStrings("data/levels/10.txt", list);     
+
+
+
     background(0);
     for (int x=0; x<cols; x++) { 
       for (int y=0; y<rows; y++) { 

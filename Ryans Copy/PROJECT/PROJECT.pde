@@ -18,7 +18,7 @@ boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, mari
 //SoundFile music;
 boolean gpaused;
 
-int state = 0;
+int state = 4;
 float w = 150;
 float h = 80;
 float buttX;
@@ -68,13 +68,14 @@ void draw() {
   }
   if ((state == 1)&& (gpaused == false)) {
     display();
-
+    goomba1.spawn();
     mario.move();
     mario.collidingWithGrid();
 
 
     goomba1.grid();
     goomba1.enemy();
+
     goomba1.test(mario);
     
     level.test(mario);
