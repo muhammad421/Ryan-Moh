@@ -39,23 +39,13 @@ class Mario {
 
 //Moves Mario
   void move() {
-    //textSize(32);
-    //fill(0);
-    //text(counter,32,32);
-    ////Detects if your on a coin ***NEEDS TO BE WORKED ON***
-    //if (tiles[int(x/tileWidth)][int(y/tileHeight)]=='C') {
-    //   tiles[int(x/tileWidth)][int(y/tileHeight)]='.';
-    //   counter++;
-    //}
-
-
     //mario moving
-    if (marioUp == true&&canJump==true) {
-      jumping = true;
-    }
-    if (jumping == true&&canJump==true) {
+    if (marioUp == true) {
+            jumping =true;
       jump();
+
     }
+
     if (marioLeft == true&&canGoLeft == true) {
       x+=tileWidth/2;
       walking();
@@ -135,24 +125,22 @@ class Mario {
 
 //Allows you to jump
   void jump() {
-    y -=tileHeight;
-    falling = true;
-    if (falling == true) {
-      gravity();
+    if (jumping == true){
+y-=tileHeight;
+jumping = false;
     }
+gravity();
+
+
   }
   
 //Prevents you from going too high
   void gravity() {
-    y =int( y + jumpSpeed);
-    jumpSpeed +=gravity;
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='#') {
-      if ((int(y/tileHeight))<=(y/tileHeight)){
-        y = y-(int(y/tileHeight))-(y/tileHeight);
-      jumping = false;
-      falling = false;
-      jumpSpeed = 0;
-      }
+    if (jumping == false && y<(y+tileHeight)){
+      y+=tileHeight/5;
+    }
+    if(tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='#'){
+      
     }
   }
 
