@@ -11,8 +11,8 @@ Things to Work on/fix:
 =======
 =====Essential Things======
 Getting the Characters to collide
-Be able to collect coins
-Have the camera follow mario
+Be able to collect coins**
+
 
 
 
@@ -21,4 +21,5 @@ Better Graphics
 Extra Characters
 Power Ups
 Multiplayer
+Have the camera follow mario
 >>>>>>> 10e4934e9c9ff294075b5339d44376b7bf93f85b
