@@ -4,19 +4,19 @@ class Mario {
   //How big is he
   float lastMove, delay, fallSpeed, gravity, dy, acceleration;
   //Moving Mario
-  int tilesHigh, tilesWide, x,y, n,counter;
-  boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft,canGoLeft,canGoRight,canJump;
+  int tilesHigh, tilesWide, x, y, n, counter;
+  boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, canJump;
 
-//declaring all the mario variables
+  //declaring all the mario variables
   Mario() {  
     p1 = loadImage("p1.png");
     p2 = loadImage("p2.png");
     p3 = loadImage("p3.png");
-   
+
     falling = false;
     jumping = false;
-acceleration = 36;
-marioUp = false;
+    acceleration = 36;
+    marioUp = false;
     marioLeft = false;
     marioRight = false;
     gravity = 5;
@@ -36,14 +36,13 @@ marioUp = false;
     y= int (height - 2*tileHeight);
   }
 
-//Moves Mario
+  //Moves Mario
   void move() {
     //mario moving
     if (marioUp == true) {
       jump();
-
     }
-    if (falling == true){
+    if (falling == true) {
       gravity();
     }
 
@@ -57,7 +56,7 @@ marioUp = false;
     }
     //Goes to next Level if off screen
     nextLevel();
-    
+
     //Walking Animation
     if (isWalking == false) {
       image(p3, x, y, tileWidth, tileHeight);
@@ -65,7 +64,8 @@ marioUp = false;
       image(p2, x, y, tileWidth, tileHeight);
     }
   }
-  
+
+  //    
   //Determins if you can goto next level
   void nextLevel() {
     if (x >= width) {
@@ -81,16 +81,14 @@ marioUp = false;
       loadLevel(n);
     } else if ( n == 0&& x < 0) {
       x = width -10;
-    }
-    else if (y>height){
+    } else if (y>height) {
       y= int (height - 2*tileHeight);
-    }
-    else if (y<0){
+    } else if (y<0) {
       y= int (height - 2*tileHeight);
     }
   }
 
-//Walking timing
+  //Walking timing
   void walking() {
     if (millis() > lastMove + delay) {
       isWalking = !isWalking;
@@ -98,54 +96,51 @@ marioUp = false;
     }
   }
 
-//Sees if you are colliding with the grid
+  //Sees if you are colliding with the grid
   void collidingWithGrid() {
     if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='#'&&((y/tileHeight)+1)!=19) {
       falling = false;
       jumping = false;
-    } 
-    else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#'&&((y/tileHeight)+1)!=19) {
+    } else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#'&&((y/tileHeight)+1)!=19) {
       y += 2*gravity;
     }
+    //else if (tiles[int(x/tileWidth)][int(y/tileHeight)]=='C') {
+    //  println("YES");
+    // tiles[int(x/tileWidth)][int(y/tileHeight)] = '.';
+    //}
     if (tiles[int(x/tileWidth)+1][int(y/tileHeight)]=='#') {
-     canGoLeft =false;
-    }
-    else {
+      canGoLeft =false;
+    } else {
       canGoLeft = true;
     }
-    if (x/tileWidth>=1){
-    if (tiles[int(x/tileWidth)-1][int(y/tileHeight)]=='#') {
-     canGoRight =false;
+    if (x/tileWidth>=1) {
+      if (tiles[int(x/tileWidth)-1][int(y/tileHeight)]=='#') {
+        canGoRight =false;
+      } else {
+        canGoRight = true;
+      }
     }
-    else {
-      canGoRight = true;
-    }
-    }
-
   }
 
-//Allows you to jump
+  //Allows you to jump
   void jump() {
-    if (acceleration != 0){
-    y-=acceleration;
-    acceleration-=2;
+    if (acceleration != 0) {
+      y-=acceleration;
+      acceleration-=2;
     }
-  falling = true;
-
-
+    falling = true;
   }
-  
-//Prevents you from going too high
+
+  //Prevents you from going too high
   void gravity() {
-  y+=3.81;
-if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='#'){
-  y -= (y-int(y/tileHeight)*int(tileHeight));
-  falling = false;
-acceleration = 36;
-  marioUp = false;
-    println(int(x/tileWidth),int(y/tileHeight)*tileHeight,y);
- 
-}
+    y+=3.81;
+    if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='#') {
+      y -= (y-int(y/tileHeight)*int(tileHeight));
+      falling = false;
+      acceleration = 36;
+      marioUp = false;
+      println(int(x/tileWidth), int(y/tileHeight)*tileHeight, y);
+    }
   }
 
 
@@ -174,7 +169,6 @@ acceleration = 36;
       marioLeft = false;
     }
   }
-  
-  //Loads text file
 
+  //Loads text file
 }

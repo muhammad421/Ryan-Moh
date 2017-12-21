@@ -1,23 +1,16 @@
 class Coin{
-  int x,y;
- 
   
   Coin(){
     
     
   }
     
-    void onCoin (Mario theCharacter,int location, int x, int y){
-      if (location == 'C'){
-      if (theCharacter.x == x*tileWidth&& theCharacter.y == y*tileHeight){
-        tiles[x][y] = '.';
-        
-      }
+  void onCoin (int location, int i, int o) {
+    if (location == 'C') {
+      if (mario.x/tileWidth== i&& mario.y/tileHeight == o) {
+        tiles[i][o] = '.';
       }
     }
-    
-
-
-  
+  }
   
 }

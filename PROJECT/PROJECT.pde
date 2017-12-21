@@ -177,7 +177,7 @@ void display() {
 
 //assignes symbols to pictures
 void showTile(char location, int x, int y) {
-  mCoin.onCoin(mario,location, x, y);
+ mCoin.onCoin(location, x, y);
   if (location == '#') {
     image(platform, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } 
