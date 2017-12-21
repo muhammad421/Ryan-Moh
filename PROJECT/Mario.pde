@@ -2,7 +2,7 @@ class Mario {
   //Image
   PImage p1, p2, p3;
   //How big is he
-  float lastMove, delay, fallSpeed, gravity, dy, jumpSpeed;
+  float lastMove, delay, fallSpeed, gravity, dy, acceleration;
   //Moving Mario
   int tilesHigh, tilesWide, x,y, n,counter;
   boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft,canGoLeft,canGoRight,canJump;
@@ -15,8 +15,8 @@ class Mario {
    
     falling = false;
     jumping = false;
-    jumpSpeed = 0;
-    marioUp = false;
+acceleration = 36;
+marioUp = false;
     marioLeft = false;
     marioRight = false;
     gravity = 5;
@@ -105,7 +105,7 @@ class Mario {
       jumping = false;
     } 
     else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#'&&((y/tileHeight)+1)!=19) {
-      y += 6;
+      y += 2*gravity;
     }
     if (tiles[int(x/tileWidth)+1][int(y/tileHeight)]=='#') {
      canGoLeft =false;
@@ -126,30 +126,24 @@ class Mario {
 
 //Allows you to jump
   void jump() {
-if(counter<7){
-  y-=jumpSpeed;
-  jumpSpeed +=6;
-  counter++;
-}
-println(y);
-if(counter == 7){
+    if (acceleration != 0){
+    y-=acceleration;
+    acceleration-=2;
+    }
   falling = true;
-}
+
 
   }
   
 //Prevents you from going too high
   void gravity() {
-if(6<counter&&counter<12){
-  y+=jumpSpeed;
-  y-=6;
-  counter++;
-}
+  y+=3.81;
 if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='#'){
+  y -= (y-int(y/tileHeight)*int(tileHeight));
   falling = false;
-  counter = 0;
-  jumpSpeed =0;
+acceleration = 36;
   marioUp = false;
+    println(int(x/tileWidth),int(y/tileHeight)*tileHeight,y);
  
 }
   }
