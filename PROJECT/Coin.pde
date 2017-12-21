@@ -9,7 +9,7 @@ class Coin{
     
     void onCoin (Mario theCharacter,int location, int x, int y){
       if (location == 'C'){
-      if (mario.x == x*tileWidth&& mario.y == y*tileHeight){
+      if (theCharacter.x == x*tileWidth&& theCharacter.y == y*tileHeight){
         tiles[x][y] = '.';
         
       }
