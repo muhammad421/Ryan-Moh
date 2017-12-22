@@ -98,16 +98,12 @@ class Mario {
 
   //Sees if you are colliding with the grid
   void collidingWithGrid() {
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='#'&&((y/tileHeight)+1)!=19) {
-      falling = false;
-      jumping = false;
-    } else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#'&&((y/tileHeight)+1)!=19) {
+ if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#') {
       y += 2*gravity;
     }
-    //else if (tiles[int(x/tileWidth)][int(y/tileHeight)]=='C') {
-    //  println("YES");
-    // tiles[int(x/tileWidth)][int(y/tileHeight)] = '.';
-    //}
+     if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
+      acceleration = 0;
+    }
     if (tiles[int(x/tileWidth)+1][int(y/tileHeight)]=='#') {
       canGoLeft =false;
     } else {
