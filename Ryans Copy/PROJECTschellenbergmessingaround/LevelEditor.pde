@@ -1,32 +1,37 @@
 class LevelEditor {
   int [][] board;
-  int cols, rows, cellWidth, cellHeight;
-  boolean clicked, scanning;
+  int cols, rows, cellWidth, cellHeight, vertical,counter;
+  boolean clicked, go, go1;
   char letter;
-  String words = "";  
-  int counter, counter1;
+  String words;  
+
+
   LevelEditor() {
     cols = 20;
     rows = 20;
     board = new int[cols][rows];
     cellWidth = (450)/cols;
     cellHeight = (450)/rows;
+    words = "";
+    go = false;
+    go1 = go;
+    vertical = 0;
     counter = 0;
-    counter1 = 0;
-    scanning = true;
   }
+  void assignValues() {
+  if (counter < (rows*cols)) {
+    board[x][y]=1;
+    counter++;
+  }
+  }
+  
   void makeGrid() {
-
-
-    String[] list = split(words, ' ');   
-    saveStrings("data/levels/10.txt", list);     
-
-
-
     background(0);
     for (int x=0; x<cols; x++) { 
       for (int y=0; y<rows; y++) { 
-        board[x][y] = 1;
+        assignValues();
+          fill(255);
+          rect(x*cellWidth+140, y*cellHeight+140, cellWidth, cellHeight);
       }
     }
   }
@@ -34,26 +39,33 @@ class LevelEditor {
     for (int x=0; x<cols; x++) { 
       for (int y=0; y<rows; y++) {
         if (board[x][y] == 1) {
-          fill(255);
-          rect(x*cellWidth+140, y*cellHeight+140, cellWidth, cellHeight);
-          if (scanning == true) {
-            words = words + ".";  
-            counter++;
-            if (counter >= 20 ) {
-              words = words + ' ';
-              counter = 0;
-              counter1++;
-            }
-            if (counter1 >= 20);
-            scanning = false;
+
+
+          if (y < rows - 1) {
+            words = words + ".";
+          } else {
+            words = words + " ";
+            vertical = vertical+1;
+          }
+          if (x < cols - 1) {
+            go = true;
           }
         }
+
         if (board[x][y] == 2) {
           image(platform, x*cellWidth+140, y*cellHeight+140, cellWidth, cellHeight);
+        }
+        if (vertical == 19) {
+          String[] list = split(words, ' ');
+          saveStrings("data/levels/10.txt", list);
         }
       }
     }
   }
+
+
+
+
   void mousePressed() {
     clicked = true;
   }
