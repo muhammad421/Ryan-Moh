@@ -103,6 +103,9 @@ class Mario {
     }
      if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
       acceleration = 0;
+      //Breaking blocks animation
+      //tiles[int(x/tileWidth)][int(y/tileHeight)-1] ='.';
+      //tiles[int(x/tileWidth)][int(y/tileHeight)-2] ='#';
     }
     if (tiles[int(x/tileWidth)+1][int(y/tileHeight)]=='#') {
       canGoLeft =false;
