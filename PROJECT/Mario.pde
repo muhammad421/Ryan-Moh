@@ -33,7 +33,7 @@ class Mario {
     canJump = true;
     delay = 150;
     lastMove = millis();
-    y= int (height - 2*tileHeight);
+    y= int (height - 3*tileHeight);
   }
 
   //Moves Mario
@@ -47,11 +47,11 @@ class Mario {
     }
 
     if (marioLeft == true&&canGoLeft == true) {
-      x+=tileWidth/2;
+      x+=20;
       walking();
     }
     if (marioRight == true&&canGoRight == true) {
-      x-=tileWidth/2;
+      x-=20;
       walking();
     }
     //Goes to next Level if off screen
@@ -76,7 +76,7 @@ class Mario {
       n--;
       x = width -10;
       loadLevel(n);
-    } else if ( n == 3) {
+    } else if ( n == 9) {
       n = 0;
       loadLevel(n);
     } else if ( n == 0&& x < 0) {
@@ -138,14 +138,14 @@ class Mario {
       falling = false;
       acceleration = 36;
       marioUp = false;
-      println(int(x/tileWidth), int(y/tileHeight)*tileHeight, y);
+      
     }
   }
 
 
   void keypressed() {
 
-    if (key == 'w' || key == 'W') {
+    if (key == 'w' || key == 'W'&&(falling ==false)) {
       marioUp = true;
     } 
     if (key== 'a' || key=='A') {
@@ -159,6 +159,7 @@ class Mario {
   void keyreleased() {
 
     if (key == 'w' || key == 'W') {
+      acceleration = 0;
       marioUp = false;
     } 
     if (key== 'a' || key=='A') {
@@ -169,5 +170,4 @@ class Mario {
     }
   }
 
-  //Loads text file
 }

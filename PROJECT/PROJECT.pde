@@ -33,7 +33,7 @@ Mainmenu homeScreen;
 Coin mCoin;
 //Sets background and calls on the mario and goomba functions
 void setup() {
-  size(720, 700);  
+  size(1440, 700);  
   bgImage = "level_background.png";
 
   buttX = width/2-75;
@@ -70,9 +70,10 @@ mCoin.onCoin();
   }
   if ((state == 1)&& (gpaused == false)) {
     display();
-
+    
     mario.move();
     mario.collidingWithGrid();
+
 
 
     goomba1.grid();
