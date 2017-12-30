@@ -70,6 +70,7 @@ mCoin.onCoin();
   }
   if ((state == 1)&& (gpaused == false)) {
     display();
+    mCoin.displayPoints();
     
     mario.move();
     mario.collidingWithGrid();
