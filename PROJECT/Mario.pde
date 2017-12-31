@@ -1,17 +1,19 @@
 class Mario {
   //Image
-  PImage p1, p2, p3;
+  PImage p1, p2, p3,p4,p5,p6;
   //How big is he
   float lastMove, delay, fallSpeed, gravity, dy, acceleration;
   //Moving Mario
-  int tilesHigh, tilesWide, x, y, n, counter;
+  int tilesHigh, tilesWide, x, y, n, counter, flipThroughPicture;
   boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, canJump;
 
   //declaring all the mario variables
   Mario() {  
-    p1 = loadImage("p1.png");
-    p2 = loadImage("p2.png");
-    p3 = loadImage("p3.png");
+    p1 = loadImage("marioRunning6.png");
+    p2 = loadImage("marioRunning2.png");
+    p3 = loadImage("marioRunning5.png");
+    p4 = loadImage("marioRunning1.png");
+
 
     falling = false;
     jumping = false;
@@ -23,6 +25,7 @@ class Mario {
 
     x =0;
     n=0;
+    flipThroughPicture = 1;
     counter = 0;
     isWalking = false;
     isMoving =false;
@@ -38,6 +41,7 @@ class Mario {
 
   //Moves Mario
   void move() {
+    isWalking = false;
     //mario moving
     if (marioUp == true) {
       jump();
@@ -48,20 +52,25 @@ class Mario {
 
     if (marioLeft == true&&canGoLeft == true) {
       x+=20;
+      isWalking = true;
       walking();
     }
     if (marioRight == true&&canGoRight == true) {
       x-=20;
+      isWalking = true;
       walking();
     }
     //Goes to next Level if off screen
     nextLevel();
-
     //Walking Animation
-    if (isWalking == false) {
-      image(p3, x, y, tileWidth, tileHeight);
-    } else {
+    if (flipThroughPicture ==1) {
+      image(p1, x, y, tileWidth, tileHeight);
+    } else if (flipThroughPicture ==2) {
       image(p2, x, y, tileWidth, tileHeight);
+    }else if (flipThroughPicture ==3) {
+      image(p3, x, y, tileWidth, tileHeight);
+    }else if (flipThroughPicture ==4) {
+      image(p4, x, y, tileWidth, tileHeight);
     }
   }
 
@@ -91,8 +100,12 @@ class Mario {
   //Walking timing
   void walking() {
     if (millis() > lastMove + delay) {
-      isWalking = !isWalking;
+      flipThroughPicture ++;
+      println(flipThroughPicture); 
       lastMove = millis();
+      if (flipThroughPicture >=4){
+        flipThroughPicture = 2;
+      }
     }
   }
 
