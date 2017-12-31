@@ -1,6 +1,6 @@
 class Mario {
   //Image
-  PImage p1, p2, p3,p4,p5,p6;
+  PImage p1, p2, p3, p4, p5, p6;
   //How big is he
   float lastMove, delay, fallSpeed, gravity, dy, acceleration;
   //Moving Mario
@@ -9,10 +9,10 @@ class Mario {
 
   //declaring all the mario variables
   Mario() {  
-    p1 = loadImage("marioRunning6.png");
-    p2 = loadImage("marioRunning2.png");
-    p3 = loadImage("marioRunning5.png");
-    p4 = loadImage("marioRunning1.png");
+    p1 = loadImage("smallMarioRunning3.png");
+    p2 = loadImage("smallMarioRunning1.png");
+    p3 = loadImage("smallMarioRunning5.png");
+    p4 = loadImage("smallMarioRunning2.png");
 
 
     falling = false;
@@ -67,9 +67,9 @@ class Mario {
       image(p1, x, y, tileWidth, tileHeight);
     } else if (flipThroughPicture ==2) {
       image(p2, x, y, tileWidth, tileHeight);
-    }else if (flipThroughPicture ==3) {
+    } else if (flipThroughPicture ==3) {
       image(p3, x, y, tileWidth, tileHeight);
-    }else if (flipThroughPicture ==4) {
+    } else if (flipThroughPicture ==4) {
       image(p4, x, y, tileWidth, tileHeight);
     }
   }
@@ -101,20 +101,19 @@ class Mario {
   void walking() {
     if (millis() > lastMove + delay) {
       flipThroughPicture ++;
-      println(flipThroughPicture); 
       lastMove = millis();
-      if (flipThroughPicture >=4){
-        flipThroughPicture = 2;
+      if (flipThroughPicture >=4) {
+        flipThroughPicture = 1;
       }
     }
   }
 
   //Sees if you are colliding with the grid
   void collidingWithGrid() {
- if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#') {
+    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#') {
       y += 2*gravity;
     }
-     if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
+    if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
       acceleration = 0;
       //Breaking blocks animation
       //tiles[int(x/tileWidth)][int(y/tileHeight)-1] ='.';
@@ -151,7 +150,6 @@ class Mario {
       falling = false;
       acceleration = 36;
       marioUp = false;
-      
     }
   }
 
@@ -177,10 +175,11 @@ class Mario {
     } 
     if (key== 'a' || key=='A') {
       marioRight = false;
+      flipThroughPicture =1;
     }
     if (key== 'd' || key=='D') {
       marioLeft = false;
+      flipThroughPicture =1;
     }
   }
-
 }
