@@ -9,8 +9,7 @@
 
 char[][] tiles;
 PImage levelBackground;
-PImage platform, coin, box, goomba, p1, slime, empty, p2, p3, cloud;
-PImage coin1, coin2, coin3, coin4, coin5, coin6;
+PImage platform, box, goomba, p1, slime, empty, p2, p3, cloud,coin1, coin2, coin3, coin4, coin5, coin6;
 int tilesHigh, tilesWide, x, y, n, coinFlip;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
@@ -214,7 +213,6 @@ void loadImages() {
 
   //load tile images
   platform = loadImage("platform.png");
-  coin = loadImage("coin.png");
   box = loadImage("box.jpg");
   goomba = loadImage("goomba.png");
   slime = loadImage("slime.png");
