@@ -1,9 +1,10 @@
 class Coin{
   int counter;
+
   
   Coin(){
     counter = 0;
-    
+
   }
     
   void onCoin () {

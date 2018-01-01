@@ -10,7 +10,8 @@
 char[][] tiles;
 PImage levelBackground;
 PImage platform, coin, box, goomba, p1, slime, empty, p2, p3, cloud;
-int tilesHigh, tilesWide, x, y, n;
+PImage coin1, coin2, coin3, coin4, coin5, coin6;
+int tilesHigh, tilesWide, x, y, n, coinFlip;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
 boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft;
@@ -46,19 +47,18 @@ void setup() {
   //music.loop();
 
   initializeValues();
-  
+
   mario = new Mario();
   goomba1 = new Goomba();
   homeScreen = new Mainmenu();
   mCoin = new Coin();
   loadLevel(mario.n);
-
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
 
 void draw() {
-mCoin.onCoin();
+  mCoin.onCoin();
   if (state == 0) {
     homeScreen.menu();
   }
@@ -71,7 +71,7 @@ mCoin.onCoin();
   if ((state == 1)&& (gpaused == false)) {
     display();
     mCoin.displayPoints();
-    
+
     mario.move();
     mario.collidingWithGrid();
 
@@ -80,10 +80,6 @@ mCoin.onCoin();
     goomba1.grid();
     goomba1.enemy();
     goomba1.test(mario);
-    
-    
-    
-    
   }
   if ((gpaused == true)&& (state == 1)) {
     pause();
@@ -110,7 +106,9 @@ void keyReleased() {
 //loads all the images used 
 void initializeValues() {
   loadImages();
-
+  delay = 150;
+  lastMove = millis();
+  coinFlip =0;
 }
 
 void pause() {
@@ -174,19 +172,29 @@ void display() {
       showTile(tiles[x][y], x, y);
     }
   }
-
 }
 
 //assignes symbols to pictures
 void showTile(char location, int x, int y) {
- //mCoin.onCoin(location, x, y);
+  //mCoin.onCoin(location, x, y);
   if (location == '#') {
     image(platform, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  } 
-    else if (location == 'C') {
-    image(coin, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  } 
-  else if (location == 'B') {
+  } else if (location == 'C') {
+    spinningCoin();
+    if (coinFlip ==1) {
+      image(coin1, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+    } else if (coinFlip ==2) {
+      image(coin2, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+    } else if (coinFlip ==3) {
+      image(coin3, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+    } else if (coinFlip ==4) {
+      image(coin4, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+    } else if (coinFlip ==5) {
+      image(coin5, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+    } else if (coinFlip ==6) {
+      image(coin6, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+    }
+  } else if (location == 'B') {
     image(box, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'F') {
     image(goomba, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
@@ -212,6 +220,12 @@ void loadImages() {
   slime = loadImage("slime.png");
   cloud = loadImage("cloud.png");
   empty = loadImage("empty.png");
+  coin1 = loadImage("coin1.png");
+  coin2 = loadImage("coin2.png");
+  coin3 = loadImage("coin3.png");
+  coin4 = loadImage("coin4.png");
+  coin5 = loadImage("coin5.png");
+  coin6 = loadImage("coin6.png");
 }
 
 //Loading Levels
@@ -233,4 +247,13 @@ void loadLevel(int n) {
   }
   tileWidth = width/tilesWide;
   tileHeight = height/tilesHigh;
+}
+void spinningCoin() {
+  if (millis() > lastMove + delay) {
+    coinFlip ++;
+    lastMove = millis();
+    if (coinFlip >=6) {
+      coinFlip = 1;
+    }
+  }
 }
