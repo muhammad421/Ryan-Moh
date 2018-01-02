@@ -1,19 +1,21 @@
 class Mario {
   //Image
-  PImage p1, p2, p3, p4, p5, p6;
+  PImage[]marioWalk = new PImage[4];
+  PImage stillMario;
   //How big is he
   float lastMove, delay, fallSpeed, gravity, dy, acceleration;
   //Moving Mario
-  int tilesHigh, tilesWide, x, y, n, counter, flipThroughPicture;
+  int tilesHigh, tilesWide, x, y, n, counter, flipThroughPicture,marioCounter;
   boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, canJump;
 
   //declaring all the mario variables
   Mario() {  
-    p1 = loadImage("smallMarioRunning3.png");
-    p2 = loadImage("smallMarioRunning1.png");
-    p3 = loadImage("smallMarioRunning5.png");
-    p4 = loadImage("smallMarioRunning2.png");
+    stillMario = loadImage("smallMarioRunning4.png");
+    marioCounter = 0;
 
+for(int i =0; i<marioWalk.length; i++){
+  marioWalk[i] = loadImage("smallMarioRunning"+i+".png");
+}
 
     falling = false;
     jumping = false;
@@ -37,6 +39,7 @@ class Mario {
     delay = 150;
     lastMove = millis();
     y= int (height - 3*tileHeight);
+
   }
 
   //Moves Mario
@@ -53,24 +56,18 @@ class Mario {
     if (marioLeft == true&&canGoLeft == true) {
       x+=20;
       isWalking = true;
-      walking();
     }
     if (marioRight == true&&canGoRight == true) {
       x-=20;
       isWalking = true;
-      walking();
     }
     //Goes to next Level if off screen
     nextLevel();
-    //Walking Animation
-    if (flipThroughPicture ==1) {
-      image(p1, x, y, tileWidth, tileHeight);
-    } else if (flipThroughPicture ==2) {
-      image(p2, x, y, tileWidth, tileHeight);
-    } else if (flipThroughPicture ==3) {
-      image(p3, x, y, tileWidth, tileHeight);
-    } else if (flipThroughPicture ==4) {
-      image(p4, x, y, tileWidth, tileHeight);
+    if (isWalking == true){
+      walking();      
+    }
+    else{
+            image(stillMario, x, y, tileWidth, tileHeight);
     }
   }
 
@@ -99,12 +96,11 @@ class Mario {
 
   //Walking timing
   void walking() {
-    if (millis() > lastMove + delay) {
-      flipThroughPicture ++;
-      lastMove = millis();
-      if (flipThroughPicture >=4) {
-        flipThroughPicture = 1;
-      }
+    image (marioWalk[marioCounter],x,y,tileWidth,tileHeight);
+    if (frameCount%1 ==0){
+      marioCounter++;
+      marioCounter = marioCounter % marioWalk.length;
+      
     }
   }
 
