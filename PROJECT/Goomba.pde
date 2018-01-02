@@ -41,10 +41,7 @@ class Goomba{
     }
   }
   
-  void test(Mario theCharacter){
-    //println(theCharacter.x);
-    
-  }
+
 //allows interaction with the grid from the goomba
   void grid() {
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight)+1]!='#'){

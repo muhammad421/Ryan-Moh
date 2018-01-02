@@ -78,7 +78,6 @@ void draw() {
 
     goomba1.grid();
     goomba1.enemy();
-    goomba1.test(mario);
   }
   if ((gpaused == true)&& (state == 1)) {
     pause();
