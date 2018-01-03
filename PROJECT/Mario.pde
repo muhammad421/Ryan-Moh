@@ -2,16 +2,15 @@ class Mario {
   //Image
   PImage[]marioWalkingLeft = new PImage[11];
   PImage[]marioWalkingRight = new PImage[11];
-  PImage stillMario;
-  //How big is he
+  PImage stillMario1, stillMario2;
   float lastMove, delay, fallSpeed, gravity, dy, acceleration;
-  //Moving Mario
   int tilesHigh, tilesWide, x, y, n, counter, marioCounter, marioCounter2;
-  boolean isWalkingLeft, isWalkingRight, falling, marioUp, marioRight, marioLeft, canGoLeft, canGoRight;
+  boolean isWalkingLeft, isWalkingRight, falling, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, facingRight;
 
   //declaring all the mario variables
   Mario() {  
-    stillMario = loadImage("mario0.png");
+    stillMario1 = loadImage("mario0.png");
+    stillMario2 = loadImage("marioTwo0.png");
     marioCounter = 0;
     marioCounter2 =0;
     for (int i =0; i<marioWalkingLeft.length; i++) {
@@ -20,7 +19,7 @@ class Mario {
     for (int j =0; j<marioWalkingRight.length; j++) {
       marioWalkingRight[j] = loadImage("marioTwo"+j+".png");
     }
-    
+
     falling = false;
     acceleration = 36;
     marioUp = false;
@@ -33,6 +32,7 @@ class Mario {
     counter = 0;
     isWalkingLeft = false;
     isWalkingRight = false;
+    facingRight = true;
     canGoLeft = true;
     canGoRight = true;
     delay = 150;
@@ -67,8 +67,10 @@ class Mario {
       walkingLeft();
     } else if (isWalkingRight == true) {
       walkingRight();
+    } else if (facingRight == false) {
+      image(stillMario1, x, y, tileWidth, tileHeight);
     } else {
-      image(stillMario, x, y, tileWidth, tileHeight);
+      image(stillMario2, x, y, tileWidth, tileHeight);
     }
   }
 
@@ -80,14 +82,13 @@ class Mario {
       x= 10;
       loadLevel(n);
     } else if (x <=0&&n!=0) {
-      n--;
-      x = width -10;
+      x = 2;
       loadLevel(n);
     } else if ( n == 9) {
       n = 0;
       loadLevel(n);
     } else if ( n == 0&& x < 0) {
-      x = width -10;
+      x = 2;
     } else if (y>height) {
       y= int (height - 2*tileHeight);
     } else if (y<0) {
@@ -95,17 +96,17 @@ class Mario {
     }
   }
 
-  //Walking timing
+  //Walking animation
   void walkingLeft() {
     image (marioWalkingLeft[marioCounter], x, y, tileWidth, tileHeight);
-    if (frameCount%1/8 ==0) {
+    if (frameCount%1 ==0) {
       marioCounter++;
       marioCounter = marioCounter % marioWalkingLeft.length;
     }
   }
   void walkingRight() {
     image (marioWalkingRight[marioCounter2], x, y, tileWidth, tileHeight);
-    if (frameCount%1/8 ==0) {
+    if (frameCount%1 ==0) {
       marioCounter2++;
       marioCounter2 = marioCounter2 % marioWalkingRight.length;
     }
@@ -160,13 +161,6 @@ class Mario {
       marioUp = true;
       if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
         tiles[int(x/tileWidth)][int(y/tileHeight)-1] ='.';
-        tiles[int(x/tileWidth)][int(y/tileHeight)-2] ='#';
-      }
-
-
-      if (millis() > lastMove + delay) {
-        lastMove = millis();
-        tiles[int(x/tileWidth)][int(y/tileHeight)-2] ='.';
       }
     } 
     if (key== 'a' || key=='A') {
@@ -186,10 +180,12 @@ class Mario {
     if (key== 'a' || key=='A') {
       marioRight = false;
       isWalkingLeft = false;
+      facingRight = false;
     }
     if (key== 'd' || key=='D') {
       marioLeft = false;
       isWalkingRight = false;
+      facingRight = true;
     }
   }
 }

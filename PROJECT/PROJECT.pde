@@ -34,6 +34,7 @@ Coin mCoin;
 //Sets background and calls on the mario and goomba functions
 void setup() {
   size(1440, 700);  
+  //fullScreen();
   bgImage = "level_background.png";
 
   buttX = width/2-75;
@@ -75,7 +76,7 @@ void draw() {
     mario.collidingWithGrid();
 
 
-
+    goomba1.spawn();
     goomba1.grid();
     goomba1.enemy();
   }

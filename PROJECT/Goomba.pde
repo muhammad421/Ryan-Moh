@@ -7,10 +7,12 @@ class Goomba{
   
 //goomba images
   PImage goomba2, goomba;
+  
+  float acceleration;
 
   Goomba() {
     goomX = 600;
-    goomY = int ((height - (2*tileHeight))- 3*tileHeight);
+    goomY = int (height - 3*tileHeight);
     goomWalk = true;
     goomDirection = 1;
 
@@ -20,6 +22,7 @@ class Goomba{
     gravity = 5;
     goomba = loadImage("goomba.png");
     goomba2 = loadImage("goomba2.png");
+    acceleration = 36;
   }
 
 //spawns on the ! in the text file
@@ -45,14 +48,17 @@ class Goomba{
 //allows interaction with the grid from the goomba
   void grid() {
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight)+1]!='#'){
-      goomX -= 5;
       gravity();
-      x = goomX;
     }
     if (tiles[int(goomX/tileWidth)+1][int(goomY/tileHeight)] == '#') {
       goomDirection = 2;
     }
-    if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight)] == '#') {
+    if (int(goomX/tileWidth)>=1){
+    if (tiles[int(goomX/tileWidth)-1][int(goomY/tileHeight)] == '#') {
+      goomDirection = 1;
+    }
+    }
+    if (goomX <=0){
       goomDirection = 1;
     }
     
@@ -61,16 +67,16 @@ class Goomba{
   
 // gravtiy function, controls the rate the goomba falls
   void gravity() {
-    goomY =int(goomY + jumpSpeed);
-    jumpSpeed = jumpSpeed + gravity;
-    if (goomY >=630) {
-      jumpSpeed = 0;
-      y = 630;
+    goomY+=3.81;
+    if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight+1)]=='#') {
+      goomY -= (goomY-int(goomY/tileHeight)*int(tileHeight));
+      falling = false;
+      acceleration = 36;
+      marioUp = false;
     }
-    y = goomY;
   }
 
-// casues the goomba to move, and switches between two imgaes
+// causes the goomba to move, and switches between two imgaes
   void enemy() {
     goomWalk();
 
@@ -81,10 +87,10 @@ class Goomba{
       if (goomWalk == false) {
         image(goomba2, goomX, goomY, tileWidth, tileHeight);
       }
-      goomX = goomX+5;
+      goomX = goomX+10;
     }
 
-    if (goomX == width-20) {
+    if (goomX >= width-10) {
       goomDirection = 2;
     }
 
@@ -96,9 +102,9 @@ class Goomba{
       if (goomWalk == true) {
         image(goomba, goomX, goomY, tileWidth, tileHeight);
       }
-      goomX = goomX-5;
+      goomX = goomX-10;
     }
-    if (goomX == 0) {
+    if (goomX <= 0) {
       goomDirection = 1;
     }
   }
