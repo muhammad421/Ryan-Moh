@@ -1,24 +1,27 @@
 class Mario {
   //Image
-  PImage[]marioWalk = new PImage[4];
+  PImage[]marioWalkingLeft = new PImage[11];
+  PImage[]marioWalkingRight = new PImage[11];
   PImage stillMario;
   //How big is he
   float lastMove, delay, fallSpeed, gravity, dy, acceleration;
   //Moving Mario
-  int tilesHigh, tilesWide, x, y, n, counter, flipThroughPicture,marioCounter;
-  boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, canJump;
+  int tilesHigh, tilesWide, x, y, n, counter, marioCounter, marioCounter2;
+  boolean isWalkingLeft, isWalkingRight, falling, marioUp, marioRight, marioLeft, canGoLeft, canGoRight;
 
   //declaring all the mario variables
   Mario() {  
-    stillMario = loadImage("smallMarioRunning4.png");
+    stillMario = loadImage("mario0.png");
     marioCounter = 0;
-
-for(int i =0; i<marioWalk.length; i++){
-  marioWalk[i] = loadImage("smallMarioRunning"+i+".png");
-}
-
+    marioCounter2 =0;
+    for (int i =0; i<marioWalkingLeft.length; i++) {
+      marioWalkingLeft[i] = loadImage("mario"+i+".png");
+    }
+    for (int j =0; j<marioWalkingRight.length; j++) {
+      marioWalkingRight[j] = loadImage("marioTwo"+j+".png");
+    }
+    
     falling = false;
-    jumping = false;
     acceleration = 36;
     marioUp = false;
     marioLeft = false;
@@ -27,19 +30,14 @@ for(int i =0; i<marioWalk.length; i++){
 
     x =0;
     n=0;
-    flipThroughPicture = 1;
     counter = 0;
-    isWalking = false;
-    isMoving =false;
-    onGround = true;
-    canIJump = true;
+    isWalkingLeft = false;
+    isWalkingRight = false;
     canGoLeft = true;
     canGoRight = true;
-    canJump = true;
     delay = 150;
     lastMove = millis();
     y= int (height - 3*tileHeight);
-
   }
 
   //Moves Mario
@@ -55,19 +53,22 @@ for(int i =0; i<marioWalk.length; i++){
 
     if (marioLeft == true&&canGoLeft == true) {
       x+=20;
-      isWalking = true;
+      isWalkingLeft = false;
+      isWalkingRight = true;
     }
     if (marioRight == true&&canGoRight == true) {
       x-=20;
-      isWalking = true;
+      isWalkingRight = false;
+      isWalkingLeft = true;
     }
     //Goes to next Level if off screen
     nextLevel();
-    if (isWalking == true){
-      walking();      
-    }
-    else{
-            image(stillMario, x, y, tileWidth, tileHeight);
+    if (isWalkingLeft == true) {
+      walkingLeft();
+    } else if (isWalkingRight == true) {
+      walkingRight();
+    } else {
+      image(stillMario, x, y, tileWidth, tileHeight);
     }
   }
 
@@ -95,12 +96,18 @@ for(int i =0; i<marioWalk.length; i++){
   }
 
   //Walking timing
-  void walking() {
-    image (marioWalk[marioCounter],x,y,tileWidth,tileHeight);
-    if (frameCount%1 ==0){
+  void walkingLeft() {
+    image (marioWalkingLeft[marioCounter], x, y, tileWidth, tileHeight);
+    if (frameCount%1/8 ==0) {
       marioCounter++;
-      marioCounter = marioCounter % marioWalk.length;
-      
+      marioCounter = marioCounter % marioWalkingLeft.length;
+    }
+  }
+  void walkingRight() {
+    image (marioWalkingRight[marioCounter2], x, y, tileWidth, tileHeight);
+    if (frameCount%1/8 ==0) {
+      marioCounter2++;
+      marioCounter2 = marioCounter2 % marioWalkingRight.length;
     }
   }
 
@@ -151,17 +158,16 @@ for(int i =0; i<marioWalk.length; i++){
 
     if (key == 'w' || key == 'W'&&(falling ==false)) {
       marioUp = true;
-     if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
-      tiles[int(x/tileWidth)][int(y/tileHeight)-1] ='.';
-      tiles[int(x/tileWidth)][int(y/tileHeight)-2] ='#';
-       }
-             
-      
-      if (millis() > lastMove + delay) {
-      lastMove = millis();
-      tiles[int(x/tileWidth)][int(y/tileHeight)-2] ='.';
-    }
+      if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
+        tiles[int(x/tileWidth)][int(y/tileHeight)-1] ='.';
+        tiles[int(x/tileWidth)][int(y/tileHeight)-2] ='#';
+      }
 
+
+      if (millis() > lastMove + delay) {
+        lastMove = millis();
+        tiles[int(x/tileWidth)][int(y/tileHeight)-2] ='.';
+      }
     } 
     if (key== 'a' || key=='A') {
       marioRight = true;
@@ -179,11 +185,11 @@ for(int i =0; i<marioWalk.length; i++){
     } 
     if (key== 'a' || key=='A') {
       marioRight = false;
-      flipThroughPicture =1;
+      isWalkingLeft = false;
     }
     if (key== 'd' || key=='D') {
       marioLeft = false;
-      flipThroughPicture =1;
+      isWalkingRight = false;
     }
   }
 }
