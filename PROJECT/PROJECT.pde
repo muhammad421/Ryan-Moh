@@ -13,7 +13,7 @@ PImage platform, box, goomba, slime, empty;
 int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
-boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft;
+boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft, canISeeGoomba;
 //import processing.sound.*;
 //SoundFile music;
 boolean gpaused;
@@ -74,9 +74,11 @@ void draw() {
 
     mario.move();
     mario.collidingWithGrid();
+    mario.collidingWithGoomba();
 
-
+if (canISeeGoomba == true){
     goomba1.spawn();
+}
     goomba1.grid();
     goomba1.enemy();
   }
@@ -107,6 +109,7 @@ void initializeValues() {
   loadImages();
   delay = 150;
   lastMove = millis();
+  canISeeGoomba = true;
 }
 
 void pause() {
