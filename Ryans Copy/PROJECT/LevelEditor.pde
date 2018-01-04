@@ -1,11 +1,13 @@
 class LevelEditor {
   int [][] board;
-  int cols, rows, cellWidth, cellHeight;
-  boolean clicked, scanning;
+  int cols, rows, cellWidth, cellHeight, vertical;
+  boolean clicked, scanning, once;
   char letter;
   String words = "";  
   int counter, counter1;
   LevelEditor() {
+    once = false;
+    vertical = 0;
     cols = 20;
     rows = 20;
     board = new int[cols][rows];
@@ -16,18 +18,14 @@ class LevelEditor {
     scanning = true;
   }
   void makeGrid() {
-
-
-    String[] list = split(words, ' ');   
-    saveStrings("data/levels/10.txt", list);     
-
-
-
-    background(0);
-    for (int x=0; x<cols; x++) { 
-      for (int y=0; y<rows; y++) { 
-        board[x][y] = 1;
+    if (once == false) {
+      background(0);
+      for (int x=0; x<cols; x++) { 
+        for (int y=0; y<rows; y++) { 
+          board[x][y] = 2;
+        }
       }
+      once = true;
     }
   }
   void displayGrid() {
@@ -36,20 +34,27 @@ class LevelEditor {
         if (board[x][y] == 1) {
           fill(255);
           rect(x*cellWidth+140, y*cellHeight+140, cellWidth, cellHeight);
-          if (scanning == true) {
-            words = words + ".";  
-            counter++;
-            if (counter >= 20 ) {
-              words = words + ' ';
-              counter = 0;
-              counter1++;
-            }
-            if (counter1 >= 20);
-            scanning = false;
+
+          if (y < rows - 1) {
+            words = words + ".";
+          } else {
+            words = words + " ";
+            vertical = vertical+1;
           }
         }
         if (board[x][y] == 2) {
           image(platform, x*cellWidth+140, y*cellHeight+140, cellWidth, cellHeight);
+
+          if (y < rows - 1) {
+            words = words + "#";
+          } else {
+            words = words + " ";
+            vertical = vertical+1;
+          }
+        }
+        if (vertical == 19) {
+          String[] list = split(words, ' ');
+          saveStrings("data/levels/10.txt", list);
         }
       }
     }
