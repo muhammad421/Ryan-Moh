@@ -75,7 +75,19 @@ class Goomba{
       marioUp = false;
     }
   }
+void attacking(){
+  if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)){
+    if((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)){
+      println("yes!");
+      
+    }
+    
+  }
 
+  
+  
+  
+}
 // causes the goomba to move, and switches between two imgaes
   void enemy() {
     goomWalk();
@@ -87,7 +99,7 @@ class Goomba{
       if (goomWalk == false) {
         image(goomba2, goomX, goomY, tileWidth, tileHeight);
       }
-      goomX = goomX+10;
+      goomX +=tileWidth/2;
     }
 
     if (goomX >= width-10) {
@@ -102,7 +114,7 @@ class Goomba{
       if (goomWalk == true) {
         image(goomba, goomX, goomY, tileWidth, tileHeight);
       }
-      goomX = goomX-10;
+      goomX -=tileWidth/2;
     }
     if (goomX <= 0) {
       goomDirection = 1;
@@ -111,10 +123,10 @@ class Goomba{
 
 //causes two images to flipped to create waling animation
   void goomWalk() {
-    if (millis() > goomMove + delay) {
-      goomWalk = !goomWalk;
-      goomMove = 0;
-    }
+  //  if (millis() > goomMove + delay) {
+  //    goomWalk = !goomWalk;
+  //    goomMove = 0;
+  //  }
   }
   
  //loads the level to interact with goomba 
