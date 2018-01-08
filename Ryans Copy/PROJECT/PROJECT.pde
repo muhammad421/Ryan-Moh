@@ -85,6 +85,7 @@ void draw() {
     level.test(mario);
   }
   if (state == 4){
+        background(0);
     saveButton.Draw();
     loadButton.Draw();
     saveButton.clicked();
