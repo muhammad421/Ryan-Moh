@@ -52,12 +52,12 @@ class Mario {
     }
 
     if (marioLeft == true&&canGoLeft == true) {
-      x+=20;
+      x+=tileWidth/2;
       isWalkingLeft = false;
       isWalkingRight = true;
     }
     if (marioRight == true&&canGoRight == true) {
-      x-=20;
+      x-=tileWidth/2;
       isWalkingRight = false;
       isWalkingLeft = true;
     }
