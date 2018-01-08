@@ -17,7 +17,7 @@ boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, mari
 //import processing.sound.*;
 //SoundFile music;
 boolean gpaused;
-
+  boolean save,load;
 int state = 4;
 float w = 150;
 float h = 80;
@@ -27,6 +27,8 @@ float buttY;
 float buttX2;
 float buttY2;
 
+Button loadButton;
+Button saveButton;
 Goomba goomba1;
 Mario mario;
 LoadLevel level;
@@ -52,6 +54,8 @@ void setup() {
   level = new LoadLevel();
     homeScreen = new Mainmenu();
     levelEdit = new LevelEditor();
+    saveButton = new Button("SAVE",200,50,100,50,1);
+    loadButton = new Button("LOAD",400,50,100,50,2);
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
@@ -81,8 +85,13 @@ void draw() {
     level.test(mario);
   }
   if (state == 4){
+    saveButton.Draw();
+    loadButton.Draw();
+    saveButton.clicked();
+    loadButton.clicked();
     levelEdit.makeGrid();
     levelEdit.displayGrid();
+    levelEdit.saveButton();
   }
   if ((gpaused == true)&& (state == 1)) {
     pause();

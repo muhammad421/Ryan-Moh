@@ -5,6 +5,7 @@ class LevelEditor {
   char letter;
   String words = "";  
   int counter, counter1;
+  
   LevelEditor() {
     once = false;
     vertical = 0;
@@ -22,7 +23,7 @@ class LevelEditor {
       background(0);
       for (int x=0; x<cols; x++) { 
         for (int y=0; y<rows; y++) { 
-          board[x][y] = 2;
+          board[x][y] = 1;
         }
       }
       once = true;
@@ -52,13 +53,29 @@ class LevelEditor {
             vertical = vertical+1;
           }
         }
-        if (vertical == 19) {
-          String[] list = split(words, ' ');
-          saveStrings("data/levels/10.txt", list);
-        }
+//        if (vertical == 19) {
+//          String[] list = split(words, ' ');
+//          saveStrings("data/levels/10.txt", list);
+//        }
       }
     }
   }
+  
+  void saveButton(){
+    if (save == true){
+            println("sadas");
+          String[] list = split(words, ' ');
+          saveStrings("data/levels/10.txt", list);      
+    }
+    if (load == true){
+            println("ljhjhk");
+     
+    }
+    
+  }
+    
+    
+  
   void mousePressed() {
     clicked = true;
   }
