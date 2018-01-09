@@ -3,7 +3,7 @@ class Goomba{
   int  goomX, goomY, goomDirection;
   
 //essentially switches if he spawns or is walking
-  boolean goomWalk, goomSpawn;
+  boolean goomWalk, goomSpawn, canSeeGoomba;
   
 //goomba images
   PImage goomba2, goomba;
@@ -15,6 +15,7 @@ class Goomba{
     goomY = int (height - 3*tileHeight);
     goomWalk = true;
     goomDirection = 1;
+    canSeeGoomba = true;
 
     goomSpawn = true;
     jumpSpeed = 0;
@@ -78,8 +79,8 @@ class Goomba{
 void attacking(){
   if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)){
     if((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)){
-      println("yes!");
-      
+      goomY = int(tileHeight);
+canSeeGoomba= false;
     }
     
   }
@@ -90,13 +91,12 @@ void attacking(){
 }
 // causes the goomba to move, and switches between two imgaes
   void enemy() {
-    goomWalk();
 
     if (goomDirection == 1) {
-      if (goomWalk == true) {
+      if (goomWalk == true&&canSeeGoomba == true) {
         image(goomba, goomX, goomY, tileWidth, tileHeight);
       }
-      if (goomWalk == false) {
+      if (goomWalk == false&&canSeeGoomba == true) {
         image(goomba2, goomX, goomY, tileWidth, tileHeight);
       }
       goomX +=tileWidth/2;
@@ -108,10 +108,10 @@ void attacking(){
 
 
     if (goomDirection == 2) {
-      if (goomWalk == false) {
+      if (goomWalk == false&&canSeeGoomba == true) {
         image(goomba2, goomX, goomY, tileWidth, tileHeight);
       }
-      if (goomWalk == true) {
+      if (goomWalk == true&&canSeeGoomba == true) {
         image(goomba, goomX, goomY, tileWidth, tileHeight);
       }
       goomX -=tileWidth/2;
@@ -122,13 +122,7 @@ void attacking(){
   }
 
 //causes two images to flipped to create waling animation
-  void goomWalk() {
-  //  if (millis() > goomMove + delay) {
-  //    goomWalk = !goomWalk;
-  //    goomMove = 0;
-  //  }
-  }
-  
+
  //loads the level to interact with goomba 
 
 }

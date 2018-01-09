@@ -75,13 +75,7 @@ class Mario {
   }
 
 
-//void collidingWithGoomba(){
-//  println(goomba1.goomX,goomba1.goomY);
-//      if (int(x/tileWidth) == int(goomba1.goomX/tileWidth)&&(int(y/tileHeight)+1)==int(goomba1.goomY/tileHeight)) {
-      
-//    } 
-//}
-  //    
+ 
   //Determins if you can goto next level
   void nextLevel() {
     if (x >= width) {
