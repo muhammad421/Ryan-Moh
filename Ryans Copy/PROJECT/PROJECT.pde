@@ -54,8 +54,8 @@ void setup() {
   level = new LoadLevel();
     homeScreen = new Mainmenu();
     levelEdit = new LevelEditor();
-    saveButton = new Button("SAVE",200,50,100,50,1);
-    loadButton = new Button("LOAD",400,50,100,50,2);
+    saveButton = new Button("SAVE",200,600,100,50,1);
+    loadButton = new Button("LOAD",400,600,100,50,2);
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
@@ -90,6 +90,7 @@ void draw() {
     saveButton.clicked();
     loadButton.clicked();
     levelEdit.makeGrid();
+    levelEdit.placeBlock();
     levelEdit.displayGrid();
     levelEdit.saveButton();
   }

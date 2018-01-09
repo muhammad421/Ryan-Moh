@@ -1,12 +1,13 @@
 class LevelEditor {
   int [][] board;
   int cols, rows, cellWidth, cellHeight, vertical;
-  boolean clicked, scanning, once;
+  boolean clicked, scanning, once,onGrid,saveOnce;
   char letter;
   String words = "";  
   int counter, counter1;
   
   LevelEditor() {
+    saveOnce = false;
     once = false;
     vertical = 0;
     cols = 20;
@@ -34,7 +35,7 @@ class LevelEditor {
       for (int y=0; y<rows; y++) {
         if (board[x][y] == 1) {
           fill(255);
-          rect(x*cellWidth+140, y*cellHeight+140, cellWidth, cellHeight);
+          rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
 
           if (y < rows - 1) {
             words = words + ".";
@@ -44,7 +45,7 @@ class LevelEditor {
           }
         }
         if (board[x][y] == 2) {
-          image(platform, x*cellWidth+140, y*cellHeight+140, cellWidth, cellHeight);
+          image(platform, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
 
           if (y < rows - 1) {
             words = words + "#";
@@ -53,25 +54,63 @@ class LevelEditor {
             vertical = vertical+1;
           }
         }
-//        if (vertical == 19) {
-//          String[] list = split(words, ' ');
-//          saveStrings("data/levels/10.txt", list);
-//        }
+        if (vertical == 19) {
+         String[] list = split(words, ' ');
+          saveStrings("data/levels/10.txt", list);
+        }
       }
     }
   }
-  
+  void mouseOnGrid(){
+  if (mouseX<= width-262){
+   if (mouseX>= 0){
+    if(mouseY <= height - 262){ 
+     if (mouseY >=0){
+     onGrid = true;
+     }
+     else{
+           onGrid = false;
+     }
+    }
+    else {
+          onGrid = false; 
+    }
+   }
+   else {
+         onGrid = false; 
+   }
+  }
+  else {
+        onGrid = false; 
+  }
+}
+
+  void placeBlock() {
+
+    mouseOnGrid();
+    if (onGrid == true){
+    if (mousePressed == true){
+  println("asd");
+   board[mouseX/22][mouseY/22] = 2;  
+    }
+    }
+}
+
+
   void saveButton(){
+    if (saveOnce == false){
     if (save == true){
             println("sadas");
           String[] list = split(words, ' ');
-          saveStrings("data/levels/10.txt", list);      
+          saveStrings("data/levels/10.txt", list);
+          saveOnce = true;
     }
     if (load == true){
             println("ljhjhk");
      
     }
-    
+
+    }
   }
     
     
