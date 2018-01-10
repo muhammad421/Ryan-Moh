@@ -37,7 +37,7 @@ class Mario {
     canGoRight = true;
     delay = 150;
     lastMove = millis();
-    y= int (height - 3*tileHeight);
+    y= 620;
   }
 
   //Moves Mario
@@ -75,7 +75,7 @@ class Mario {
   }
 
 
- 
+
   //Determins if you can goto next level
   void nextLevel() {
     if (x >= width) {
@@ -115,8 +115,10 @@ class Mario {
 
   //Sees if you are colliding with the grid
   void collidingWithGrid() {
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#') {
-      y += 2*gravity;
+    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='.'||tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='C') {
+      falling = true;
+    } else {
+      falling = false;
     }
     if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
       acceleration = 0;
@@ -133,29 +135,8 @@ class Mario {
         canGoRight = true;
       }
     }
-    
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='B'){
-     if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='B') {
-      y += 2*gravity;
-    }
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='B') {
-      acceleration = 0;
-    }
-    if (tiles[int(x/tileWidth)+1][int(y/tileHeight)]=='B') {
-      canGoLeft =false;
-    } else {
-      canGoLeft = true;
-    }
-    if (x/tileWidth>=1) {
-      if (tiles[int(x/tileWidth)-1][int(y/tileHeight)]=='B') {
-        canGoRight =false;
-      } else {
-        canGoRight = true;
-      }
-    }
-    }
   }
-//
+  //
   //Allows you to jump
   void jump() {
     if (acceleration != 0) {
@@ -167,8 +148,8 @@ class Mario {
 
   //Prevents you from going too high
   void gravity() {
-    y+=3.81;
-    if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='#') {
+    y+=5*3.81;
+  if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'&&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='C') {
       y -= (y-int(y/tileHeight)*int(tileHeight));
       falling = false;
       acceleration = 36;

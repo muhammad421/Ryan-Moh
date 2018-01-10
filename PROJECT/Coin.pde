@@ -33,9 +33,6 @@ textSize(32);
 text(counter, 100, 100);
   
 }
-void walkingLeft(){
-  
-  
-}
+
   
 }

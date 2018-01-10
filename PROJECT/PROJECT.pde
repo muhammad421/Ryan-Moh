@@ -9,7 +9,7 @@
 
 char[][] tiles;
 PImage levelBackground;
-PImage platform, box, goomba, slime, empty;
+PImage platform,goomba, slime, empty;
 int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
@@ -31,9 +31,10 @@ Goomba goomba1;
 Mario mario;
 Mainmenu homeScreen;
 Coin mCoin;
+Mystery_Block mBlock;
 //Sets background and calls on the mario and goomba functions
 void setup() {
-  size(1440, 700);  
+  size(720, 700);  
   //fullScreen();
   bgImage = "level_background.png";
 
@@ -52,6 +53,7 @@ void setup() {
   goomba1 = new Goomba();
   homeScreen = new Mainmenu();
   mCoin = new Coin();
+  mBlock = new Mystery_Block();
   loadLevel(mario.n);
 }
 
@@ -70,17 +72,18 @@ void draw() {
   }
   if ((state == 1)&& (gpaused == false)) {
     display();
+    
     mCoin.displayPoints();
 
     mario.move();
     mario.collidingWithGrid();
-    //mario.collidingWithGoomba();
-
 
     goomba1.spawn();
     goomba1.attacking();
     goomba1.grid();
     goomba1.enemy();
+    
+    mBlock.marioHittingBlock();
   }
   if ((gpaused == true)&& (state == 1)) {
     pause();
@@ -177,11 +180,10 @@ void display() {
 //assignes symbols to pictures
 void showTile(char location, int x, int y) {
   mCoin.displayCoin(location, int(x*tileWidth), int(y*tileHeight));
+  mBlock.display(location, int(x*tileWidth), int(y*tileHeight));
   if (location == '#') {
     image(platform, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  }  else if (location == 'B') {
-    image(box, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  } else if (location == 'F') {
+  }   else if (location == 'F') {
     image(goomba, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'S') {
     image(slime, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
@@ -197,7 +199,6 @@ void loadImages() {
 
   //load tile images
   platform = loadImage("platform.png");
-  box = loadImage("box.jpg");
   goomba = loadImage("goomba.png");
   slime = loadImage("slime.png");
   empty = loadImage("empty.png");
