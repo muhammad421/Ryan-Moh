@@ -99,7 +99,7 @@ canSeeGoomba= false;
 // causes the goomba to move, and switches between two imgaes
   void enemy() {
 
-    if (goomDirection == 1) {
+    if (goomDirection == 1&&canSeeGoomba == true) {
           image (goombaRight[goomCounterTwo], goomX, goomY, tileWidth, tileHeight);
     if (frameCount%1 ==0) {
       goomCounterTwo++;
@@ -113,7 +113,7 @@ canSeeGoomba= false;
     }
 
 
-    if (goomDirection == 2) {
+    if (goomDirection == 2&&canSeeGoomba == true) {
       println(goomX);
           image (goombaLeft[goomCounterOne], goomX, goomY, tileWidth, tileHeight);
     if (frameCount%1 ==0) {

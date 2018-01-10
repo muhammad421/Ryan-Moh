@@ -3,7 +3,7 @@ class Mario {
   PImage[]marioWalkingLeft = new PImage[11];
   PImage[]marioWalkingRight = new PImage[11];
   PImage stillMario1, stillMario2;
-  float lastMove, delay, fallSpeed, gravity, dy, acceleration;
+  float lastMove, delay, fallSpeed, gravity, acceleration;
   int tilesHigh, tilesWide, x, y, n, counter, marioCounter, marioCounter2;
   boolean isWalkingLeft, isWalkingRight, falling, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, facingRight;
 
@@ -133,8 +133,29 @@ class Mario {
         canGoRight = true;
       }
     }
+    
+    if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='B'){
+     if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='B') {
+      y += 2*gravity;
+    }
+    if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='B') {
+      acceleration = 0;
+    }
+    if (tiles[int(x/tileWidth)+1][int(y/tileHeight)]=='B') {
+      canGoLeft =false;
+    } else {
+      canGoLeft = true;
+    }
+    if (x/tileWidth>=1) {
+      if (tiles[int(x/tileWidth)-1][int(y/tileHeight)]=='B') {
+        canGoRight =false;
+      } else {
+        canGoRight = true;
+      }
+    }
+    }
   }
-
+//
   //Allows you to jump
   void jump() {
     if (acceleration != 0) {
