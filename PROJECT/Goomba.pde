@@ -75,7 +75,7 @@ class Goomba{
   
 // gravtiy function, controls the rate the goomba falls
   void gravity() {
-    goomY+=3.81;
+    goomY+=5*3.81;
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight+1)]=='#') {
       goomY -= (goomY-int(goomY/tileHeight)*int(tileHeight));
       falling = false;
@@ -83,18 +83,22 @@ class Goomba{
       marioUp = false;
     }
   }
-void attacking(){
+void attacked(){
   if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)){
     if((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)){
       goomY = int(tileHeight);
 canSeeGoomba= false;
     }
     
+  }  
+  
+}
+void attacking(){
+  println(goomY/tileHeight, mario.y/tileHeight);
+  if (goomX/tileWidth+1==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight||goomX/tileWidth-1==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight){
+    
+    
   }
-
-  
-  
-  
 }
 // causes the goomba to move, and switches between two imgaes
   void enemy() {
@@ -114,7 +118,6 @@ canSeeGoomba= false;
 
 
     if (goomDirection == 2&&canSeeGoomba == true) {
-      println(goomX);
           image (goombaLeft[goomCounterOne], goomX, goomY, tileWidth, tileHeight);
     if (frameCount%1 ==0) {
       goomCounterOne++;

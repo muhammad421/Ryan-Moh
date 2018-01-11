@@ -32,6 +32,7 @@ Mario mario;
 Mainmenu homeScreen;
 Coin mCoin;
 Mystery_Block mBlock;
+RegularBrick mBrick;
 //Sets background and calls on the mario and goomba functions
 void setup() {
   size(720, 700);  
@@ -54,6 +55,7 @@ void setup() {
   homeScreen = new Mainmenu();
   mCoin = new Coin();
   mBlock = new Mystery_Block();
+  mBrick = new RegularBrick();
   loadLevel(mario.n);
 }
 
@@ -79,11 +81,14 @@ void draw() {
     mario.collidingWithGrid();
 
     goomba1.spawn();
+    goomba1.attacked();
     goomba1.attacking();
     goomba1.grid();
     goomba1.enemy();
     
     mBlock.marioHittingBlock();
+    
+    mBrick.marioHittingBrick();
   }
   if ((gpaused == true)&& (state == 1)) {
     pause();
@@ -181,9 +186,8 @@ void display() {
 void showTile(char location, int x, int y) {
   mCoin.displayCoin(location, int(x*tileWidth), int(y*tileHeight));
   mBlock.display(location, int(x*tileWidth), int(y*tileHeight));
-  if (location == '#') {
-    image(platform, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  }   else if (location == 'F') {
+  mBrick.display(location, int(x*tileWidth), int(y*tileHeight));
+ if (location == 'F') {
     image(goomba, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'S') {
     image(slime, x*tileWidth, y*tileHeight, tileWidth, tileHeight);

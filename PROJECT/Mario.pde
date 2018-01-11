@@ -162,9 +162,6 @@ class Mario {
 
     if (key == 'w' || key == 'W'&&(falling ==false)) {
       marioUp = true;
-      if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
-        tiles[int(x/tileWidth)][int(y/tileHeight)-1] ='.';
-      }
     } 
     if (key== 'a' || key=='A') {
       marioRight = true;
