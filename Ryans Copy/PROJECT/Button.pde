@@ -27,7 +27,10 @@ class Button {
     text(label, x + (w / 2), y + (h / 2));
   }
   void clicked(){
-    if ((MouseIsOver() ==true) && (mousePressed == true)){
+    if (MouseIsOver() ==true){ 
+      w = 110;
+      h = 55;
+      if(mousePressed == true){
 
       if (selectButton==1){
        save = true;
@@ -35,8 +38,13 @@ class Button {
       if (selectButton==2){
         load = true;
       }
+      }
+
     }
-    
+        else{
+          w = 100;
+    h = 50;
+      }  
     
   }
   boolean MouseIsOver() {

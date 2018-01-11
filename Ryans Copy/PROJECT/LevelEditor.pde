@@ -38,8 +38,10 @@ class LevelEditor {
           rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
 
           if (y < rows - 1) {
+            if (vertical <20){
             words = words + ".";
-          } else {
+            }
+          } else{
             words = words + " ";
             vertical = vertical+1;
           }
@@ -48,16 +50,19 @@ class LevelEditor {
           image(platform, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
 
           if (y < rows - 1) {
+            if (vertical < 20){
             words = words + "#";
+            }
           } else {
+            
             words = words + " ";
             vertical = vertical+1;
           }
         }
-        if (vertical == 19) {
-         String[] list = split(words, ' ');
-          saveStrings("data/levels/10.txt", list);
-        }
+ //       if (vertical == 19) {
+     //     String[] list = split(words, ' ');
+   //       saveStrings("data/levels/10.txt", list);
+     //   }
       }
     }
   }
@@ -101,7 +106,7 @@ class LevelEditor {
     if (saveOnce == false){
     if (save == true){
             println("sadas");
-          String[] list = split(words, ' ');
+         String[] list = split(words, ' ');
           saveStrings("data/levels/10.txt", list);
           saveOnce = true;
     }

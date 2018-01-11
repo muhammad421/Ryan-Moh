@@ -27,6 +27,8 @@ float buttY;
 float buttX2;
 float buttY2;
 
+BlockSelect boxS;
+BlockSelect coinS;
 Button loadButton;
 Button saveButton;
 Goomba goomba1;
@@ -56,6 +58,8 @@ void setup() {
     levelEdit = new LevelEditor();
     saveButton = new Button("SAVE",200,600,100,50,1);
     loadButton = new Button("LOAD",400,600,100,50,2);
+    coinS = new BlockSelect(coin,600,300,30,30);
+    boxS = new BlockSelect(box,600,400,30,30);
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
@@ -85,10 +89,16 @@ void draw() {
     level.test(mario);
   }
   if (state == 4){
+    background(0);
     saveButton.Draw();
     loadButton.Draw();
     saveButton.clicked();
     loadButton.clicked();
+    coinS.Draw();
+
+    boxS.Draw();
+        coinS.clicked();
+    boxS.clicked();
     levelEdit.makeGrid();
     levelEdit.placeBlock();
     levelEdit.displayGrid();
