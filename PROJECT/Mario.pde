@@ -84,7 +84,6 @@ class Mario {
       loadLevel(n);
     } else if (x <=0&&n!=0) {
       x = 2;
-      loadLevel(n);
     } else if ( n == 9) {
       n = 0;
       loadLevel(n);
@@ -151,9 +150,9 @@ class Mario {
     y+=5*3.81;
   if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'&&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='C') {
       y -= (y-int(y/tileHeight)*int(tileHeight));
-      falling = false;
+      //falling = false;
+      //marioUp = false;
       acceleration = 36;
-      marioUp = false;
     }
   }
 
