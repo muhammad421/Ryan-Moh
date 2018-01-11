@@ -1,12 +1,13 @@
 class Goomba{
   //where he is and direction facing
-  int  goomX, goomY, goomDirection;
+  int  goomX, goomY, goomDirection, goomCounterOne, goomCounterTwo;
   
 //essentially switches if he spawns or is walking
-  boolean goomWalk, goomSpawn;
+  boolean goomWalk, goomSpawn, canSeeGoomba;
   
 //goomba images
-  PImage goomba2, goomba;
+  PImage[] goombaLeft = new PImage[5];
+  PImage[] goombaRight = new PImage[5];
   
   float acceleration;
 
@@ -15,13 +16,20 @@ class Goomba{
     goomY = int (height - 3*tileHeight);
     goomWalk = true;
     goomDirection = 1;
+    canSeeGoomba = true;
 
+    goomCounterOne = 0;
+    goomCounterTwo = 0;
     goomSpawn = true;
     jumpSpeed = 0;
     fallSpeed = 0;
     gravity = 5;
-    goomba = loadImage("goomba.png");
-    goomba2 = loadImage("goomba2.png");
+    for (int i =0; i<goombaLeft.length; i++) {
+      goombaLeft[i] = loadImage("goomba"+i+".png");
+    }
+     for (int j =0; j<goombaRight.length; j++) {
+      goombaRight[j] = loadImage("goombaTwo"+j+".png");
+    }
     acceleration = 36;
   }
 
@@ -67,7 +75,7 @@ class Goomba{
   
 // gravtiy function, controls the rate the goomba falls
   void gravity() {
-    goomY+=3.81;
+    goomY+=5*3.81;
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight+1)]=='#') {
       goomY -= (goomY-int(goomY/tileHeight)*int(tileHeight));
       falling = false;
@@ -75,30 +83,32 @@ class Goomba{
       marioUp = false;
     }
   }
-void attacking(){
+void attacked(){
   if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)){
     if((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)){
-      println("yes!");
-      
+      goomY = int(tileHeight);
+canSeeGoomba= false;
     }
     
+  }  
+  
+}
+void attacking(){
+  println(goomY/tileHeight, mario.y/tileHeight);
+  if (goomX/tileWidth+1==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight||goomX/tileWidth-1==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight){
+    
+    
   }
-
-  
-  
-  
 }
 // causes the goomba to move, and switches between two imgaes
   void enemy() {
-    goomWalk();
 
-    if (goomDirection == 1) {
-      if (goomWalk == true) {
-        image(goomba, goomX, goomY, tileWidth, tileHeight);
-      }
-      if (goomWalk == false) {
-        image(goomba2, goomX, goomY, tileWidth, tileHeight);
-      }
+    if (goomDirection == 1&&canSeeGoomba == true) {
+          image (goombaRight[goomCounterTwo], goomX, goomY, tileWidth, tileHeight);
+    if (frameCount%1 ==0) {
+      goomCounterTwo++;
+      goomCounterTwo =  goomCounterTwo% goombaRight.length;
+    }
       goomX +=tileWidth/2;
     }
 
@@ -107,13 +117,12 @@ void attacking(){
     }
 
 
-    if (goomDirection == 2) {
-      if (goomWalk == false) {
-        image(goomba2, goomX, goomY, tileWidth, tileHeight);
-      }
-      if (goomWalk == true) {
-        image(goomba, goomX, goomY, tileWidth, tileHeight);
-      }
+    if (goomDirection == 2&&canSeeGoomba == true) {
+          image (goombaLeft[goomCounterOne], goomX, goomY, tileWidth, tileHeight);
+    if (frameCount%1 ==0) {
+      goomCounterOne++;
+      goomCounterOne =  goomCounterOne% goombaLeft.length;
+    }
       goomX -=tileWidth/2;
     }
     if (goomX <= 0) {
@@ -122,13 +131,7 @@ void attacking(){
   }
 
 //causes two images to flipped to create waling animation
-  void goomWalk() {
-  //  if (millis() > goomMove + delay) {
-  //    goomWalk = !goomWalk;
-  //    goomMove = 0;
-  //  }
-  }
-  
+
  //loads the level to interact with goomba 
 
 }

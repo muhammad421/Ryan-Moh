@@ -3,7 +3,7 @@ class Mario {
   PImage[]marioWalkingLeft = new PImage[11];
   PImage[]marioWalkingRight = new PImage[11];
   PImage stillMario1, stillMario2;
-  float lastMove, delay, fallSpeed, gravity, dy, acceleration;
+  float lastMove, delay, fallSpeed, gravity, acceleration;
   int tilesHigh, tilesWide, x, y, n, counter, marioCounter, marioCounter2;
   boolean isWalkingLeft, isWalkingRight, falling, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, facingRight;
 
@@ -37,7 +37,7 @@ class Mario {
     canGoRight = true;
     delay = 150;
     lastMove = millis();
-    y= int (height - 3*tileHeight);
+    y= 620;
   }
 
   //Moves Mario
@@ -75,13 +75,7 @@ class Mario {
   }
 
 
-//void collidingWithGoomba(){
-//  println(goomba1.goomX,goomba1.goomY);
-//      if (int(x/tileWidth) == int(goomba1.goomX/tileWidth)&&(int(y/tileHeight)+1)==int(goomba1.goomY/tileHeight)) {
-      
-//    } 
-//}
-  //    
+
   //Determins if you can goto next level
   void nextLevel() {
     if (x >= width) {
@@ -121,8 +115,10 @@ class Mario {
 
   //Sees if you are colliding with the grid
   void collidingWithGrid() {
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]!='#') {
-      y += 2*gravity;
+    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='.'||tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='C') {
+      falling = true;
+    } else {
+      falling = false;
     }
     if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
       acceleration = 0;
@@ -140,7 +136,7 @@ class Mario {
       }
     }
   }
-
+  //
   //Allows you to jump
   void jump() {
     if (acceleration != 0) {
@@ -152,8 +148,8 @@ class Mario {
 
   //Prevents you from going too high
   void gravity() {
-    y+=3.81;
-    if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='#') {
+    y+=5*3.81;
+  if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'&&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='C') {
       y -= (y-int(y/tileHeight)*int(tileHeight));
       falling = false;
       acceleration = 36;
@@ -166,9 +162,6 @@ class Mario {
 
     if (key == 'w' || key == 'W'&&(falling ==false)) {
       marioUp = true;
-      if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
-        tiles[int(x/tileWidth)][int(y/tileHeight)-1] ='.';
-      }
     } 
     if (key== 'a' || key=='A') {
       marioRight = true;
