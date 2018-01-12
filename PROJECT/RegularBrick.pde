@@ -17,7 +17,7 @@ class RegularBrick{
   }
   
   void marioHittingBrick() {
-    if (tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)-1]== '#') {
+    if (tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)-1]== 'Y') {
       mario.acceleration = 0; 
       if (key == 'w' || key == 'W'){
        tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)-1] = '.';

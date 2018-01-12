@@ -95,8 +95,8 @@ canSeeGoomba= false;
 }
 void attacking(){
   println(goomY/tileHeight, mario.y/tileHeight);
-  if (goomX/tileWidth+1==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight||goomX/tileWidth-1==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight){
-   
+  if (goomX/tileWidth==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight){
+
     
   }
 }

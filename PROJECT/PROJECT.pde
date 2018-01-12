@@ -9,7 +9,7 @@
 
 char[][] tiles;
 PImage levelBackground;
-PImage platform,goomba, slime, empty;
+PImage platform,goomba, slime, empty,dirt,brick;
 int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
@@ -194,6 +194,12 @@ void showTile(char location, int x, int y) {
   } else if (location == '.') {
     image(empty, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   }
+  else if (location == 'D') {
+    image(dirt, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+  }
+  else if (location == 'Y') {
+    image(brick, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+  }
 }
 
 //loads Images
@@ -206,6 +212,8 @@ void loadImages() {
   goomba = loadImage("goomba.png");
   slime = loadImage("slime.png");
   empty = loadImage("empty.png");
+  dirt = loadImage("dirt.png");
+  brick = loadImage("brick.png");
 }
 
 //Loading Levels

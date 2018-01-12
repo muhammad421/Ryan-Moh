@@ -122,18 +122,6 @@ class Mario {
     if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
       acceleration = 0;
     }
-    if (tiles[int(x/tileWidth)+1][int(y/tileHeight)]=='#') {
-      canGoLeft =false;
-    } else {
-      canGoLeft = true;
-    }
-    if (x/tileWidth>=1) {
-      if (tiles[int(x/tileWidth)-1][int(y/tileHeight)]=='#') {
-        canGoRight =false;
-      } else {
-        canGoRight = true;
-      }
-    }
   }
   //
   //Allows you to jump
