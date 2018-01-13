@@ -25,17 +25,5 @@ class Mystery_Block {
       tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)-2] = 'C';
       }
     }
-    if (tiles[int(mario.x/tileWidth)+1][int(mario.y/tileHeight)]=='B'||tiles[int(mario.x/tileWidth)+1][int(mario.y/tileHeight)]=='#'||tiles[int(mario.x/tileWidth)+1][int(mario.y/tileHeight)]=='Y') {
-      mario.canGoLeft =false;
-    } else {
-      mario.canGoLeft = true;
-    }
-    if (x/tileWidth>=1) {
-      if (tiles[int(mario.x/tileWidth)-1][int(mario.y/tileHeight)]=='B'||tiles[int(mario.x/tileWidth)-1][int(mario.y/tileHeight)]=='#'||tiles[int(mario.x/tileWidth)-1][int(mario.y/tileHeight)]=='Y') {
-        mario.canGoRight =false;
-      } else {
-        mario.canGoRight = true;
-      }
-    }
   }
 }

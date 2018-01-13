@@ -80,6 +80,8 @@ class Mario {
   void nextLevel() {
     if (x >= width) {
       n++;
+ goomba1.goomDirection = 1;
+      goomba1.canSeeGoomba = true;
       x= 10;
       loadLevel(n);
     } else if (x <=0&&n!=0) {
