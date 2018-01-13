@@ -162,7 +162,7 @@ void mainScreen() {
       if (mouseX>buttX2 && mouseX <buttX2+w && mouseY>buttY2 && mouseY <buttY2+h) {
         state = 3;
       }
-    }
+     }
   }
 }
 

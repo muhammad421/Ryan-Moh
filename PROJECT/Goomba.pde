@@ -93,6 +93,8 @@ class Goomba {
   }
   void attacking() {
     if (goomX/tileWidth==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight) {
+state = 2;
+
     }
   }
   // causes the goomba to move, and switches between two imgaes
