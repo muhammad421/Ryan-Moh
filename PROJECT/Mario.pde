@@ -52,12 +52,12 @@ class Mario {
     }
 
     if (marioLeft == true&&canGoLeft == true) {
-      x+=tileWidth/2;
+      x+=tileWidth/4;
       isWalkingLeft = false;
       isWalkingRight = true;
     }
     if (marioRight == true&&canGoRight == true) {
-      x-=tileWidth/2;
+      x-=tileWidth/4;
       isWalkingRight = false;
       isWalkingLeft = true;
     }
@@ -80,7 +80,7 @@ class Mario {
   void nextLevel() {
     if (x >= width) {
       n++;
- goomba1.goomDirection = 1;
+      goomba1.goomDirection = 1;
       goomba1.canSeeGoomba = true;
       x= 10;
       loadLevel(n);
@@ -118,6 +118,8 @@ class Mario {
   void collidingWithGrid() {
     if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='.'||tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='C') {
       falling = true;
+    } else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='!') {
+      tiles[int(x/tileWidth)][int(y/tileHeight)+1]='.';
     } else {
       falling = false;
     }
@@ -138,7 +140,7 @@ class Mario {
   //Prevents you from going too high
   void gravity() {
     y+=5*3.81;
-  if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'&&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='C') {
+    if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'&&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='C') {
       y -= (y-int(y/tileHeight)*int(tileHeight));
       //falling = false;
       //marioUp = false;

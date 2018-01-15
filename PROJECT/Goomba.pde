@@ -106,7 +106,7 @@ state = 2;
         goomCounterTwo++;
         goomCounterTwo =  goomCounterTwo% goombaRight.length;
       }
-      goomX +=tileWidth/2;
+      goomX +=tileWidth/4;
     }
 
     if (goomX >= width-10) {
@@ -120,7 +120,7 @@ state = 2;
         goomCounterOne++;
         goomCounterOne =  goomCounterOne% goombaLeft.length;
       }
-      goomX -=tileWidth/2;
+      goomX -=tileWidth/4;
     }
     if (goomX <= 0) {
       goomDirection = 1;
