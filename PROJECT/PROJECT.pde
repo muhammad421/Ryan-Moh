@@ -2,10 +2,6 @@
 //Dec 5th 2017
 //MARIO PLATFORMER
 //Muhammad Haris && Ryan McMurtry
-//Muhammad did the Mario Object
-//Ryan did the Goomba Object
-//We collectivly did the colliding with grid and text files
-//Only thing that needs to be fixed is having it so that when your on a coin the coin stays off the screen
 
 char[][] tiles;
 PImage levelBackground;
@@ -14,8 +10,8 @@ int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
 boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft;
-//import processing.sound.*;
-//SoundFile music;
+import processing.sound.*;
+SoundFile music;
 boolean gpaused,save,load;
 int block;
 
@@ -65,8 +61,8 @@ void setup() {
   buttX2 =width/2-75;
   gpaused = false;
 
-  //music = new SoundFile(this, "music.mp3");
-  //music.loop();
+  music = new SoundFile(this, "song.mp3");
+  music.loop();
 
   initializeValues();
 
