@@ -10,8 +10,8 @@ int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
 boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft;
-import processing.sound.*;
-SoundFile music;
+//import processing.sound.*;
+//SoundFile music;
 boolean gpaused,save,load;
 int block;
 
@@ -61,8 +61,8 @@ void setup() {
   buttX2 =width/2-75;
   gpaused = false;
 
-  music = new SoundFile(this, "song.mp3");
-  music.loop();
+  //music = new SoundFile(this, "song.mp3");
+  //music.loop();
 
   initializeValues();
 
