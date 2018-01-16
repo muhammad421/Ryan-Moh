@@ -46,6 +46,8 @@ class Button {
       }
       if (selectButton==2){
         load = true;
+        state = 1;
+        loadLevel(10);
       }
       if (selectButton ==3){
         state = 0;

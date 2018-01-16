@@ -95,7 +95,17 @@ class LevelEditor {
             vertical = vertical+1;
           }
         }        
-        
+        if (board[x][y] == 6) {
+          image(brick, y*cellWidth, x*cellHeight, cellWidth, cellHeight);
+
+          if (y < rows) {
+            words = words + "Y";
+          } 
+          if (y >= rows -1) {
+            words = words + " ";
+            vertical = vertical+1;
+          }
+        }                
 
 //        if (vertical == 19) {
 
@@ -148,7 +158,8 @@ class LevelEditor {
         save = false;
       }
       if (load == true) {
-        println("ljhjhk");
+        state =1;
+        n = 10;
       }
     }
   }
