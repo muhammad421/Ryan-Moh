@@ -11,7 +11,7 @@ class Mystery_Block {
   void display(int location, int x, int y) {
     if (location == 'B') {
       image(spinBlock[blockCounter], x, y, tileWidth, tileHeight);
-      if (frameCount %1 == 0) {
+      if (frameCount %5 == 0) {
         blockCounter ++;
         blockCounter = blockCounter % spinBlock.length;
       }

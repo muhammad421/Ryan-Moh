@@ -21,7 +21,7 @@ if (tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)] == 'C'){
   void displayCoin(int location, int x, int y){
     if (location == 'C') {
       image(coinSpin[coinCounter], x,y, tileWidth, tileHeight);
-      if (frameCount %1 == 0){
+      if (frameCount %4 == 0){
         coinCounter ++;
         coinCounter = coinCounter % coinSpin.length;
       }

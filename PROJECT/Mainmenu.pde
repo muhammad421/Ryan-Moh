@@ -17,8 +17,12 @@ class Mainmenu {
 
     image(mainScreen, 0, 0, width, height); 
     image(shroom, shroomX, shroomY, 35, 35);
-
+    textSize(30);
+    text("1 Player Game", 380,430);
+    text("2 Player Game", 380,480);
     image(bricks,0,665,width,35);
+    levelEditor.Draw();
+    levelEditor.clicked();
 
   }
   void keypressed() {
