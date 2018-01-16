@@ -37,7 +37,7 @@ class LevelEditor {
         if (board[x][y] == 1) {
           fill(255);
           stroke(1);
-          rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+          rect(y*cellWidth, x*cellHeight, cellWidth, cellHeight);
 
           if (y < rows) {
             words = words + ".";
@@ -49,7 +49,7 @@ class LevelEditor {
           }
         }
         if (board[x][y] == 2) {
-          image(box, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+          image(box, y*cellWidth, x*cellHeight, cellWidth, cellHeight);
           
           if (y < rows) {
             words = words + "B";
@@ -118,7 +118,7 @@ class LevelEditor {
     if (onGrid == true) {
       if (mousePressed == true) {
         println("asd");
-        board[mouseX/30][mouseY/30] = block;
+        board[mouseY/30][mouseX/30] = block;
       }
     }
   }
