@@ -61,7 +61,7 @@ class LevelEditor {
         }
 
         if (board[x][y] == 3) {
-          image(coin, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+          image(coin, y*cellWidth, x*cellHeight, cellWidth, cellHeight);
 
           if (y < rows-1) {
             words = words + "C";
@@ -73,7 +73,8 @@ class LevelEditor {
         }
 
         if (board[x][y] == 4) {
-          image(platform, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+          image(platform, y*cellWidth, x
+          *cellHeight, cellWidth, cellHeight);
 
           if (y < rows-1) {
             words = words + "#";
