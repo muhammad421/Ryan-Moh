@@ -18,6 +18,7 @@ class LevelEditor {
     counter = 0;
     counter1 = 0;
     scanning = true;
+    block= 1;
   }
   void makeGrid() {
     if (once == false) {
@@ -73,8 +74,7 @@ class LevelEditor {
         }
 
         if (board[x][y] == 4) {
-          image(platform, y*cellWidth, x
-          *cellHeight, cellWidth, cellHeight);
+          image(platform, y*cellWidth, x*cellHeight, cellWidth, cellHeight);
 
           if (y < rows) {
             words = words + "#";
@@ -84,6 +84,18 @@ class LevelEditor {
             vertical = vertical+1;
           }
         }
+        if (board[x][y] == 5) {
+          image(dirt, y*cellWidth, x*cellHeight, cellWidth, cellHeight);
+
+          if (y < rows) {
+            words = words + "D";
+          } 
+          if (y >= rows -1) {
+            words = words + " ";
+            vertical = vertical+1;
+          }
+        }        
+        
 
 //        if (vertical == 19) {
 

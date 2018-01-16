@@ -22,7 +22,7 @@ class Button {
   void Draw() {
       textSize(20);
       if (c ==1){
-    fill(#68E0D9);
+    fill(#3FBFFF);
       }
       if (c == 2){
        fill(#3FBFFF); 

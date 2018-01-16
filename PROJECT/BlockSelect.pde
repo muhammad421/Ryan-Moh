@@ -17,6 +17,7 @@ class BlockSelect {
 
   void Draw() {
     image(image, x, y, w, h);
+    text("BLOCKS", 655,20);
   }
 
 
@@ -34,9 +35,12 @@ class BlockSelect {
         if (selectBlock == 4) {
           block = 4;
         }
-        if (selectBlock == 5) {
+        if (selectBlock == 1) {
           block = 1;
         }
+        if (selectBlock == 5) {
+          block = 5;
+        }        
         println("asdad");
       }
     } else {
