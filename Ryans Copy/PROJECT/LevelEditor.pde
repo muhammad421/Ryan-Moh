@@ -31,43 +31,73 @@ class LevelEditor {
     }
   }
   void displayGrid() {
+    words = "";
     for (int x=0; x<cols; x++) { 
       for (int y=0; y<rows; y++) {
         if (board[x][y] == 1) {
           fill(255);
           rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
 
-          if (y < rows - 1) {
-            if (vertical <20){
+          if (y < rows-1) {
+         //   if (vertical <20){
             words = words + ".";
-            }
+            //}
           } else{
             words = words + " ";
             vertical = vertical+1;
           }
         }
         if (board[x][y] == 2) {
-          image(platform, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+          image(box, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
 
-          if (y < rows - 1) {
-            if (vertical < 20){
-            words = words + "#";
-            }
+          if (y < rows-1) {
+            //if (vertical < 20){
+            words = words + "B";
+           // }
           } else {
             
             words = words + " ";
             vertical = vertical+1;
           }
         }
- //       if (vertical == 19) {
-     //     String[] list = split(words, ' ');
-   //       saveStrings("data/levels/10.txt", list);
-     //   }
+        
+                if (board[x][y] == 3) {
+          image(coin, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+
+          if (y < rows-1) {
+            //if (vertical < 20){
+            words = words + "C";
+           // }
+          } else {
+            
+            words = words + " ";
+            vertical = vertical+1;
+          }
+        }
+        
+                if (board[x][y] == 4) {
+          image(platform, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+
+          if (y < rows-1) {
+            //if (vertical < 20){
+            words = words + "#";
+           // }
+          } else {
+            
+            words = words + " ";
+            vertical = vertical+1;
+          }
+        }
+        
+        if (vertical == 19) {
+         String[] list = split(words, ' ');
+          saveStrings("data/levels/10.txt", list);
+      }
       }
     }
   }
   void mouseOnGrid(){
-  if (mouseX<= width-262){
+  if (mouseX<= width-280){
    if (mouseX>= 0){
     if(mouseY <= height - 262){ 
      if (mouseY >=0){
@@ -96,7 +126,7 @@ class LevelEditor {
     if (onGrid == true){
     if (mousePressed == true){
   println("asd");
-   board[mouseX/22][mouseY/22] = 2;  
+   board[mouseX/22][mouseY/22] = block;  
     }
     }
 }
@@ -109,13 +139,14 @@ class LevelEditor {
          String[] list = split(words, ' ');
           saveStrings("data/levels/10.txt", list);
           saveOnce = true;
+          save = false;
     }
     if (load == true){
             println("ljhjhk");
      
     }
 
-    }
+   }
   }
     
     
