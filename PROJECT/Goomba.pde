@@ -44,7 +44,6 @@ class Goomba {
             goomY = int(y*tileHeight);
 
 
-            //tiles[x][y] = '.';
             goomSpawn = false;
           }
         }
@@ -86,14 +85,12 @@ class Goomba {
     if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)) {
       if ((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)) {
         goomDirection =3;
-        //canSeeGoomba= false;
       }
     }
   }
   void attacking() {
     if (goomX/tileWidth==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight) {
 state = 2;
-
     }
   }
   // causes the goomba to move, and switches between two imgaes
