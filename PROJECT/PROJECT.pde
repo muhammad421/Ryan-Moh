@@ -5,7 +5,7 @@
 
 char[][] tiles;
 PImage levelBackground;
-PImage platform,goomba, slime, empty,dirt,brick, coin,box, eraser,gameover,playagain,deathScreen;
+PImage platform,goomba, slime, empty,dirt,brick, coin,box, eraser,gameover,playagain,deathScreen,mainScreen;
 int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
@@ -42,6 +42,8 @@ BlockSelect platformS;
 BlockSelect boxS;
 BlockSelect coinS;
 BlockSelect eraserS;
+BlockSelect dirtS;
+BlockSelect blockS;
 
 Button loadButton;
 Button saveButton;
@@ -64,6 +66,10 @@ void setup() {
 //  music = new SoundFile(this, "song.mp3");
 //  music.loop();
 
+  //music = new SoundFile(this, "song.mp3");
+  //music.loop();
+
+
   initializeValues();
 
   mario = new Mario();
@@ -78,11 +84,13 @@ void setup() {
     levelEdit = new LevelEditor();
     saveButton = new Button("SAVE",200,620,100,50,1,1);
     loadButton = new Button("LOAD",400,620,100,50,2,1);
-    levelEditor = new Button("Level Editor", 580,580, 100,20,4,2);
-    coinS = new BlockSelect(coin,630,300,30,30,3);
-    boxS = new BlockSelect(box,630,350,30,30,2);
-    platformS = new BlockSelect(platform,630,250,30,30,4);
-    eraserS = new BlockSelect(eraser, 630,200,30,30,5);
+    levelEditor = new Button("Level Editor", 580,580, 100,20,4,1);
+    coinS = new BlockSelect(coin,630,150,30,30,3);
+    boxS = new BlockSelect(box,630,200,30,30,2);
+    platformS = new BlockSelect(platform,630,100,30,30,4);
+    eraserS = new BlockSelect(eraser, 630,500,30,30,1);
+    dirtS = new BlockSelect(dirt, 630,50,30,30,5);
+    blockS = new BlockSelect(brick, 630, 250,30,30,6);
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
@@ -117,19 +125,28 @@ void draw() {
     mBrick.marioHittingBrick();
   }
       if (state == 4){
-    background(0);
+    image(mainScreen, 0,0,width,height);
     saveButton.Draw();
     loadButton.Draw();
     saveButton.clicked();
     loadButton.clicked();
+    
+    
     coinS.Draw();
     platformS.Draw();
     boxS.Draw();
     eraserS.Draw();
+    dirtS.Draw();
+    blockS.Draw();
+    
+    
     platformS.clicked();
     coinS.clicked();
     boxS.clicked();
     eraserS.clicked();
+    dirtS.clicked();
+    blockS.clicked();
+    
     levelEdit.makeGrid();
     levelEdit.placeBlock();
     levelEdit.displayGrid();
@@ -276,6 +293,7 @@ void loadImages() {
   gameover = loadImage("gameover.png");
   playagain = loadImage("playagain.png");
   deathScreen = loadImage("deathScreen.jpg");
+      mainScreen = loadImage("mainscreen.jpg");
 }
 
 //Loading Levels
