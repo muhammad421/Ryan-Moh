@@ -115,6 +115,7 @@ void draw() {
     mBlock.marioHittingBlock();
     
     mBrick.marioHittingBrick();
+    mBrick.rectangle();
   }
       if (state == 4){
     background(0);
@@ -144,6 +145,7 @@ void draw() {
 //moves Mario
 void keyPressed() {
   mario.keypressed();
+  mBrick.keypressed();
   if (key == 'p' || key == 'P') {
 
     gpaused = !gpaused;
