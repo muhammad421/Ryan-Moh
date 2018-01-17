@@ -21,10 +21,7 @@ class Goomba {
     goomCounterOne = 0;
     goomCounterTwo = 0;
     goomSpawn = true;
-    jumpSpeed = 0;
-    fallSpeed = 0;
-    gravity = 5;
-    for (int i =0; i<goombaLeft.length; i++) {
+        for (int i =0; i<goombaLeft.length; i++) {
       goombaLeft[i] = loadImage("goomba"+i+".png");
     }
     for (int j =0; j<goombaRight.length; j++) {
@@ -76,9 +73,7 @@ class Goomba {
     goomY+=5*3.81;
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight+1)]!='.'&&tiles[int(goomX/tileWidth)][int(goomY/tileHeight+1)]!='C') {
       goomY -= (goomY-int(goomY/tileHeight)*int(tileHeight));
-      falling = false;
       acceleration = 36;
-      marioUp = false;
     }
   }
   void attacked() {

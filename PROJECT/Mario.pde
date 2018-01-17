@@ -42,7 +42,6 @@ class Mario {
 
   //Moves Mario
   void move() {
-    isWalking = false;
     //mario moving
     if (marioUp == true) {
       jump();
