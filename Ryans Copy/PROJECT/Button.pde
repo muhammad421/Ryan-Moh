@@ -5,13 +5,15 @@ class Button {
   float w;    
   float h;  
   float selectButton;
+  float c;
   
-  Button(String labelB, float xpos, float ypos, float widthB, float heightB, float _selectButton) {
+  Button(String labelB, float xpos, float ypos, float widthB, float heightB, float _selectButton, float c_) {
     label = labelB;
     x = xpos;
     y = ypos;
     w = widthB;
     h = heightB;
+    c = c_;
     selectButton = _selectButton;
     save = false;
     load = false;
@@ -19,11 +21,18 @@ class Button {
   
   void Draw() {
       textSize(20);
-    fill(#68E0D9);
+      if (c ==1){
+    fill(#3FBFFF);
+      }
+      if (c == 2){
+       fill(#3FBFFF); 
+      }
     stroke(141);
+      noStroke();
     rect(x, y, w, h, 10);
     textAlign(CENTER, CENTER);
-    fill(0);
+  fill(255);
+      textFont(font);
     text(label, x + (w / 2), y + (h / 2));
   }
   void clicked(){
@@ -37,6 +46,17 @@ class Button {
       }
       if (selectButton==2){
         load = true;
+        state = 1;
+        loadLevel(10);
+      }
+      if (selectButton ==3){
+        state = 0;
+        mario.x = 0;
+        mario.y = 620;
+        mario.n = 0;
+      }
+      if (selectButton == 4){
+       state = 4; 
       }
       }
 
