@@ -126,6 +126,46 @@ class Mario {
     //if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
     //  acceleration = 0;
     //}
+            if (tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= '.'||tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= 'C'){
+          canGoLeft = false;
+          fill(105,255,255);
+          rect((x+tileWidth),y,tileWidth,tileHeight);
+          
+        }
+        else{
+          canGoLeft = true;;
+        }
+        if (int((y-tileHeight)/tileHeight)>=0){
+           if (tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= '.'){
+          acceleration =0;
+          fill(255,0,0);
+          rect(((x)/tileWidth),((y-tileHeight)/tileHeight), tileWidth, tileHeight);
+        }
+        else{
+          //acceleration = 36;
+          fill(145,255,255);
+          falling = true;
+        }
+        }
+        if (tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= '.'){
+          //canGoRight = false;
+          fill(0);
+          rect(((x)/tileWidth),((y)/tileHeight), tileWidth, tileHeight);
+        }
+        else if(tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'){
+          //acceleration = 0;
+          fill(0,255,0);
+          rect(((x)/tileWidth),((y+tileHeight)/tileHeight), tileWidth, tileHeight);
+        }
+        else if(tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'){
+          //falling = false;
+          fill(0,255,255);
+          rect(((x+tileWidth)/tileWidth),((y+tileHeight)/tileHeight), tileWidth, tileHeight);
+        }
+        else{
+          fill(145,255,255);
+         //falling = true; 
+        }
   }
   //
   //Allows you to jump
