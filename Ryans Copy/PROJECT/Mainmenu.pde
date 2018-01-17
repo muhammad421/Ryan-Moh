@@ -39,6 +39,7 @@ class Mainmenu {
       }
       if (shroomLocation ==2){
        state = 3; 
+       shroomLocation = 0;
         
       }
     }

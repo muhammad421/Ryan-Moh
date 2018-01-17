@@ -1,11 +1,12 @@
 class BlockSelect {
+  
+//Variables  
   PImage image;
-  float x;    
-  float y; 
-  float w;
-  float h;
+  float x, y, w, h;    
   float selectBlock;
 
+
+//Constructor
   BlockSelect(PImage image_, float xPos, float yPos, float w_, float h_, float selectBlock_) {
     image = image_;
     x = xPos;
@@ -15,6 +16,8 @@ class BlockSelect {
     selectBlock = selectBlock_;
   }
 
+
+//Creates the image of the Block
   void Draw() {
     image(image, x, y, w, h);
     text("BLOCKS", 655,20);
