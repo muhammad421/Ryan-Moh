@@ -5,14 +5,14 @@
 
 char[][] tiles;
 PImage levelBackground;
-PImage platform,goomba, slime, empty,dirt,brick, coin,box, eraser,gameover,playagain,deathScreen,mainScreen;
+PImage platform, goomba, slime, empty, dirt, brick, coin, box, eraser, gameover, playagain, deathScreen, mainScreen, pole;
 int tilesHigh, tilesWide, x, y, n;
 float tileWidth, tileHeight, lastMove, delay, fallSpeed, gravity, dy, jumpSpeed, goomMove;
 String bgImage, levelToLoad;
 boolean isWalking, isMoving, onGround, canIJump, falling, jumping, marioUp, marioRight, marioLeft;
 //import processing.sound.*;
 //SoundFile music;
-boolean gpaused,save,load;
+boolean gpaused, save, load;
 int block;
 
 
@@ -45,6 +45,7 @@ BlockSelect eraserS;
 BlockSelect dirtS;
 BlockSelect blockS;
 
+Button backButton;
 Button loadButton;
 Button saveButton;
 Button playagainS;
@@ -55,7 +56,7 @@ void setup() {
   //fullScreen();
   bgImage = "level_background.png";
 
-  font = createFont("joystik.ttf",20);
+  font = createFont("joystik.ttf", 20);
 
   buttX = width/2-75;
   buttY = height/2-40;
@@ -63,8 +64,8 @@ void setup() {
   buttX2 =width/2-75;
   gpaused = false;
 
-//  music = new SoundFile(this, "song.mp3");
-//  music.loop();
+  //  music = new SoundFile(this, "song.mp3");
+  //  music.loop();
 
   //music = new SoundFile(this, "song.mp3");
   //music.loop();
@@ -79,36 +80,39 @@ void setup() {
   mBlock = new Mystery_Block();
   mBrick = new RegularBrick();
   loadLevel(mario.n);
-  
-    playagainS = new Button("Play Again", width/2 - 60, height/2+80, 50,50,3,2);
-    levelEdit = new LevelEditor();
-    saveButton = new Button("SAVE",200,620,100,50,1,1);
-    loadButton = new Button("LOAD",400,620,100,50,2,1);
-    levelEditor = new Button("Level Editor", 580,580, 100,20,4,1);
-    coinS = new BlockSelect(coin,630,150,30,30,3);
-    boxS = new BlockSelect(box,630,200,30,30,2);
-    platformS = new BlockSelect(platform,630,100,30,30,4);
-    eraserS = new BlockSelect(eraser, 630,500,30,30,1);
-    dirtS = new BlockSelect(dirt, 630,50,30,30,5);
-    blockS = new BlockSelect(brick, 630, 250,30,30,6);
+
+  playagainS = new Button("Play Again", width/2 - 60, height/2+80, 50, 50, 3);
+  levelEdit = new LevelEditor();
+  saveButton = new Button("SAVE", 200, 620, 100, 50, 1);
+  loadButton = new Button("LOAD", 400, 620, 100, 50, 2);
+  levelEditor = new Button("Level Editor", 580, 580, 100, 20, 4);
+  backButton = new Button("BACK", 10, 10, 30, 30, 5);
+
+  coinS = new BlockSelect(coin, 630, 150, 30, 30, 3);
+  boxS = new BlockSelect(box, 630, 200, 30, 30, 2);
+  platformS = new BlockSelect(platform, 630, 100, 30, 30, 4);
+  eraserS = new BlockSelect(eraser, 630, 500, 30, 30, 1);
+  dirtS = new BlockSelect(dirt, 630, 50, 30, 30, 5);
+  blockS = new BlockSelect(brick, 630, 250, 30, 30, 6);
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
 
 void draw() {
   mCoin.onCoin();
-  if (state == 0) {
+  if (state == 0||state==6) {
+
     homeScreen.menu();
   }
   if (state == 2) {
     dead();
   }
   if (state == 3) {
-    instructions();
+instructions();
   }
   if ((state == 1)&& (gpaused == false)) {
     display();
-    
+
     mCoin.displayPoints();
 
     mario.move();
@@ -119,40 +123,40 @@ void draw() {
     goomba1.attacking();
     goomba1.grid();
     goomba1.enemy();
-    
+
     mBlock.marioHittingBlock();
-    
+
     mBrick.marioHittingBrick();
   }
-      if (state == 4){
-    image(mainScreen, 0,0,width,height);
+  if (state == 4) {
+    image(mainScreen, 0, 0, width, height);
     saveButton.Draw();
     loadButton.Draw();
     saveButton.clicked();
     loadButton.clicked();
-    
-    
+
+
     coinS.Draw();
     platformS.Draw();
     boxS.Draw();
     eraserS.Draw();
     dirtS.Draw();
     blockS.Draw();
-    
-    
+
+
     platformS.clicked();
     coinS.clicked();
     boxS.clicked();
     eraserS.clicked();
     dirtS.clicked();
     blockS.clicked();
-    
+
     levelEdit.makeGrid();
     levelEdit.placeBlock();
     levelEdit.displayGrid();
     levelEdit.saveButton();
   }
-  
+
   if ((gpaused == true)&& (state == 1)) {
     pause();
   }
@@ -192,15 +196,15 @@ void pause() {
 
 //Instruction screen
 void instructions() {
-  background(255);
-  fill(0);
-  rect(100, 100, width-200, height-200);
-  fill(255);
-  text("Controls", 300, 200);
+  image(deathScreen, 0, 0, width, height);
+    backButton.Draw();
+  backButton.clicked();
+  text("Controls", width/2, 150);
   textSize(20);
-  text("WASD - to move", 150, 250);
-  text("P - pause and unpause and go back", 150, 300);
+  text("WASD - to move", width/2, 250);
+  text("P - PAUSE AND UNPAUSE", width/2, 300);
   textSize(32);
+
 }
 
 //Pause and start screen
@@ -225,20 +229,19 @@ void mainScreen() {
       if (mouseX>buttX2 && mouseX <buttX2+w && mouseY>buttY2 && mouseY <buttY2+h) {
         state = 3;
       }
-     }
+    }
   }
 }
 
 void dead() {
-  image(deathScreen,0,0,width,height);
+  image(deathScreen, 0, 0, width, height);
   textFont(font);
-  textAlign(CENTER,CENTER);
-    playagainS.Draw();
+  textAlign(CENTER, CENTER);
+  playagainS.Draw();
   playagainS.clicked();
 
   textSize(50);
-  text("GAMEOVER", width/2,height/2-200);
-
+  text("GAMEOVER", width/2, height/2-200);
 }
 
 //displays the background and places all the blocks
@@ -257,18 +260,18 @@ void showTile(char location, int x, int y) {
   mCoin.displayCoin(location, int(x*tileWidth), int(y*tileHeight));
   mBlock.display(location, int(x*tileWidth), int(y*tileHeight));
   mBrick.display(location, int(x*tileWidth), int(y*tileHeight));
- if (location == 'F') {
+  if (location == 'F') {
     image(goomba, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'S') {
     image(slime, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == '.') {
     image(empty, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  }
-  else if (location == 'D') {
+  } else if (location == 'D') {
     image(dirt, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  }
-  else if (location == 'Y') {
+  } else if (location == 'Y') {
     image(brick, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+  } else if (location == '|') {
+    image (pole, x*tileHeight, (y-4)*tileHeight, tileWidth, 5*tileHeight);
   }
 }
 
@@ -284,16 +287,16 @@ void loadImages() {
   empty = loadImage("empty.png");
   dirt = loadImage("dirt.png");
   brick = loadImage("brick.png");
-  
-    coin = loadImage("coin0.png");
+
+  coin = loadImage("coin0.png");
   box = loadImage("box.jpg");
-  
-  
+
+
   eraser = loadImage("Eraser.png");
   gameover = loadImage("gameover.png");
   playagain = loadImage("playagain.png");
   deathScreen = loadImage("deathScreen.jpg");
-      mainScreen = loadImage("mainscreen.jpg");
+  mainScreen = loadImage("mainscreen.jpg");
 }
 
 //Loading Levels

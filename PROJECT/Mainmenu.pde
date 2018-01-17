@@ -8,7 +8,7 @@ class Mainmenu {
     bricks = loadImage("bricks.jpg");
     shroomLocation = 1;
     shroomX = 200;
-    shroomY = 417;
+    shroomY = 400;
 
   }
   void menu() {
@@ -18,8 +18,8 @@ class Mainmenu {
     image(mainScreen, 0, 0, width, height); 
     image(shroom, shroomX, shroomY, 35, 35);
     textSize(30);
-    text("1 Player Game", 380,430);
-    text("2 Player Game", 380,480);
+    text("1 PLAYER GAME", 380,410);
+    text("HELP", 380,487);
     image(bricks,0,665,width,35);
     levelEditor.Draw();
     levelEditor.clicked();
@@ -37,14 +37,21 @@ class Mainmenu {
       if (shroomLocation == 1){
        state = 1; 
       }
+      if (shroomLocation ==2){
+       state = 3; 
+       shroomLocation = 0;
+        
+      }
     }
   }
   void shroom(){
    if (shroomLocation == 1){
-        shroomY = 417;
+        shroomY = 400;
+    shroomX = 200;        
    }
    if (shroomLocation == 2){
-         shroomY = 467;
+         shroomY = 477;
+             shroomX = 280;
    }
     
   }
