@@ -37,7 +37,7 @@ class Mario {
     canGoRight = true;
     delay = 150;
     lastMove = millis();
-    y= 620;
+    y= 630;
   }
 
   //Moves Mario
@@ -78,7 +78,7 @@ class Mario {
 
   //Determins if you can goto next level
   void nextLevel() {
-    if (x >= width) {
+    if (x >= width-40) {
       n++;
       goomba1.goomDirection = 1;
       goomba1.canSeeGoomba = true;
@@ -116,56 +116,45 @@ class Mario {
 
   //Sees if you are colliding with the grid
   void collidingWithGrid() {
-    //if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='.'||tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='C') {
-    //  falling = true;
-    //} else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='!') {
-    //  tiles[int(x/tileWidth)][int(y/tileHeight)+1]='.';
-    //} else {
-    //  falling = false;
-    //}
-    //if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
-    //  acceleration = 0;
-    //}
-            if (tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= '.'||tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= 'C'){
-          canGoLeft = false;
-          fill(105,255,255);
-          rect((x+tileWidth),y,tileWidth,tileHeight);
-          
-        }
-        else{
-          canGoLeft = true;;
-        }
-        if (int((y-tileHeight)/tileHeight)>=0){
-           if (tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= '.'){
-          acceleration =0;
-          fill(255,0,0);
-          rect(((x)/tileWidth),((y-tileHeight)/tileHeight), tileWidth, tileHeight);
-        }
-        else{
-          //acceleration = 36;
-          fill(145,255,255);
-          falling = true;
-        }
-        }
-        if (tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= '.'){
-          //canGoRight = false;
-          fill(0);
-          rect(((x)/tileWidth),((y)/tileHeight), tileWidth, tileHeight);
-        }
-        else if(tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'){
-          //acceleration = 0;
-          fill(0,255,0);
-          rect(((x)/tileWidth),((y+tileHeight)/tileHeight), tileWidth, tileHeight);
-        }
-        else if(tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'){
-          //falling = false;
-          fill(0,255,255);
-          rect(((x+tileWidth)/tileWidth),((y+tileHeight)/tileHeight), tileWidth, tileHeight);
-        }
-        else{
-          fill(145,255,255);
-         //falling = true; 
-        }
+    if (tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= '.'
+      &&tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= 'C'
+      &&tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= '!') {
+      canGoLeft = false;
+    } else {
+      canGoLeft = true;
+    }
+    if (int((y-tileHeight)/tileHeight)>=0) {
+      if (tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= '.'
+        &&tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= 'C'
+        &&tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= '!') {
+        acceleration =0;
+        falling = true;
+      } else {
+
+        falling = false;
+      }
+    }
+    if (tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= '.'
+      &&tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= 'C'
+      &&tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= '!') {
+      canGoRight = false;
+    } else {
+      canGoRight = true;
+    }
+    if (tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'
+      &&tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= 'C'
+      &&tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '!') {
+      falling = false;
+    } else {
+      falling = true;
+    }
+    if (tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'
+      &&tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= 'C'
+      &&tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '!') {
+      falling = false;
+    } else {
+      falling = true;
+    }
   }
   //
   //Allows you to jump
@@ -180,10 +169,10 @@ class Mario {
   //Prevents you from going too high
   void gravity() {
     y+=5*3.81;
-    if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'&&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='C') {
+    if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'
+    &&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='C'
+    &&tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='!') {
       y -= (y-int(y/tileHeight)*int(tileHeight));
-      //falling = false;
-      //marioUp = false;
       acceleration = 36;
     }
   }
