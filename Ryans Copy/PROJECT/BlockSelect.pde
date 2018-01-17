@@ -4,13 +4,15 @@ class BlockSelect {
   float y; 
   float w;
   float h;
-
-  BlockSelect(PImage image_, float xPos, float yPos, float w_, float h_) {
+  float selectBlock;
+  
+  BlockSelect(PImage image_, float xPos, float yPos, float w_, float h_,float selectBlock_) {
     image = image_;
     x = xPos;
     y = yPos;
     w = w_;
     h = h_;
+  selectBlock = selectBlock_;
   }
 
   void Draw() {
@@ -23,6 +25,15 @@ class BlockSelect {
       w = 35;
       h = 35;
       if (mousePressed == true) {
+        if (selectBlock == 3){
+          block = 3;
+        }
+        if (selectBlock == 2){
+          block = 2;
+        }
+                if (selectBlock == 4){
+          block = 4;
+        }
 println("asdad");
         }
     } 

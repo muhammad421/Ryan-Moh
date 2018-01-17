@@ -83,7 +83,6 @@ class Goomba {
     }
   }
   void attacked() {
-    println(goomX/tileWidth,goomY/tileHeight);
     if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)) {
       if ((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)) {
         goomDirection =3;

@@ -116,16 +116,16 @@ class Mario {
 
   //Sees if you are colliding with the grid
   void collidingWithGrid() {
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='.'||tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='C') {
-      falling = true;
-    } else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='!') {
-      tiles[int(x/tileWidth)][int(y/tileHeight)+1]='.';
-    } else {
-      falling = false;
-    }
-    if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
-      acceleration = 0;
-    }
+    //if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='.'||tiles[int(x/tileWidth)][int(y/tileHeight+1)]=='C') {
+    //  falling = true;
+    //} else if (tiles[int(x/tileWidth)][int(y/tileHeight)+1]=='!') {
+    //  tiles[int(x/tileWidth)][int(y/tileHeight)+1]='.';
+    //} else {
+    //  falling = false;
+    //}
+    //if (tiles[int(x/tileWidth)][int(y/tileHeight)-1]=='#') {
+    //  acceleration = 0;
+    //}
   }
   //
   //Allows you to jump

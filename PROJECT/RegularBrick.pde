@@ -1,5 +1,5 @@
 class RegularBrick{
-  
+  int k ,l;
   
   RegularBrick(){
     
@@ -36,7 +36,46 @@ class RegularBrick{
       }
     }
   }
-  
+  void rectangle(){
+        //println((l+tileWidth)/tileWidth,((k)/tileHeight));
+        if (tiles[int((mario.x+tileWidth)/tileWidth)][int(mario.y/tileHeight)]!= '.'){
+          fill(0,0,255);
+        }
+        else if (int((mario.y-tileHeight)/tileHeight)>=0){
+           if (tiles[int((mario.x)/tileWidth)][int((mario.y-tileHeight)/tileHeight)]!= '.'){
+          fill(255,255,255);
+        }
+        else{
+          fill(255);
+        }
+        }
+        if (tiles[int((mario.x)/tileWidth)][int((mario.y)/tileHeight)]!= '.'){
+          fill(0,255,255);
+        }
+        else if(tiles[int((mario.x)/tileWidth)][int((mario.y+tileHeight)/tileHeight)]!= '.'){
+          fill(0,255,0);
+        }
+        else if(tiles[int((mario.x+tileWidth)/tileWidth)][int((mario.y+tileHeight)/tileHeight)]!= '.'){
+          fill(230,255,155);
+        }
+        else{
+         fill(255); 
+        }
+  }
+    void keypressed(){
+      if (key == 'y' || key == 'Y'){
+        k -=5;
+      }
+      if (key == 'h' || key == 'H'){
+        k +=5;
+      }
+      if (key == 'j' || key == 'J'){
+        l +=5;
+      }
+      if (key == 'g' || key == 'G'){
+        l -=5;
+      }
+    }
   
   
 }
