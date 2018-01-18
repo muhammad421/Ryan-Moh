@@ -1,11 +1,11 @@
 class BlockSelect {
+  
+//variables
   PImage image;
-  float x;    
-  float y; 
-  float w;
-  float h;
+  float x, y, w, h;    
   float selectBlock;
 
+//Constructor
   BlockSelect(PImage image_, float xPos, float yPos, float w_, float h_, float selectBlock_) {
     image = image_;
     x = xPos;
@@ -15,13 +15,12 @@ class BlockSelect {
     selectBlock = selectBlock_;
   }
 
+//Creates the blocks
   void Draw() {
     image(image, x, y, w, h);
-    text("BLOCKS", 655,20);
-    text("ERASER", 655,470);
   }
 
-
+//Detect which block is selected to be entered into the grid
   void clicked() {
     if (MouseIsOver() ==true) { 
       w = 35;
@@ -52,6 +51,8 @@ class BlockSelect {
       h = 30;
     }
   }
+  
+//Tells if the mouse is over the buttons
   boolean MouseIsOver() {
     if (mouseX > x && mouseX < (x + w) && mouseY > y && mouseY < (y + h)) {
 

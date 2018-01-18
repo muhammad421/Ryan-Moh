@@ -1,7 +1,11 @@
 class Mainmenu {
+
+  //Variables
   PImage mainScreen, shroom, bricks;
   int shroomX, shroomY ;
   int shroomLocation;
+
+  //Constructor
   Mainmenu() {
     mainScreen = loadImage("mainscreen.jpg");
     shroom = loadImage("lilshroom.png");
@@ -9,8 +13,9 @@ class Mainmenu {
     shroomLocation = 1;
     shroomX = 200;
     shroomY = 400;
-
   }
+
+  //Draws the mainmenu
   void menu() {
     keypressed();
     shroom();
@@ -18,41 +23,41 @@ class Mainmenu {
     image(mainScreen, 0, 0, width, height); 
     image(shroom, shroomX, shroomY, 35, 35);
     textSize(30);
-    text("1 PLAYER GAME", 380,410);
-    text("HELP", 380,487);
-    image(bricks,0,665,width,35);
+    text("1 PLAYER GAME", 380, 410);
+    text("HELP", 380, 487);
+    image(bricks, 0, 665, width, 35);
     levelEditor.Draw();
     levelEditor.clicked();
-
   }
-  void keypressed() {
 
+  //Detects which key is pressed, and puts the shroom in the correct location
+  void keypressed() {
     if (key == 'w' || key == 'W') {
       shroomLocation = 1;
     } 
     if (key== 's' || key=='S') {
       shroomLocation = 2;
     }
-    if (key == ENTER || key == ENTER){
-      if (shroomLocation == 1){
-       state = 1; 
+    if (key == ENTER || key == ENTER) {
+      if (shroomLocation == 1) {
+        state = 1;
       }
-      if (shroomLocation ==2){
-       state = 3; 
-       shroomLocation = 0;
-        
+      if (shroomLocation ==2) {
+        state = 3; 
+        shroomLocation = 0;
       }
     }
   }
-  void shroom(){
-   if (shroomLocation == 1){
-        shroomY = 400;
-    shroomX = 200;        
-   }
-   if (shroomLocation == 2){
-         shroomY = 477;
-             shroomX = 280;
-   }
-    
+
+  //Draws and moves the little shroom
+  void shroom() {
+    if (shroomLocation == 1) {
+      shroomY = 400;
+      shroomX = 200;
+    }
+    if (shroomLocation == 2) {
+      shroomY = 477;
+      shroomX = 280;
+    }
   }
 }

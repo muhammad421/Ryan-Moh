@@ -1,28 +1,30 @@
 class LevelEditor {
+  
+//variables
   int [][] board;
-  int cols, rows, cellWidth, cellHeight, vertical;
-  boolean clicked, scanning, once, onGrid, saveOnce;
+  int cols, rows, cellWidth, cellHeight;
+  boolean clicked, once, onGrid, saveOnce;
   char letter;
   String words = "";  
-  int counter, counter1;
 
+
+//Constructor
   LevelEditor() {
     saveOnce = false;
     once = false;
-    vertical = 0;
     cols = 20;
     rows = 20;
     board = new int[cols][rows];
     cellWidth = (600)/cols;
     cellHeight = (600)/rows;
-    counter = 0;
-    counter1 = 0;
-    scanning = true;
     block= 1;
   }
+  
+//Initially makes the grid
   void makeGrid() {
+    text("BLOCKS", 655,20);
+    text("ERASER", 655,470);
     if (once == false) {
-      background(0);
       for (int x=0; x<cols; x++) { 
         for (int y=0; y<rows; y++) { 
           
@@ -32,6 +34,8 @@ class LevelEditor {
       once = true;
     }
   }
+  
+//creates and draws the grid filled with the correct blocks 
   void displayGrid() {
     board[19][0] = 4;
     words = "";
@@ -46,7 +50,6 @@ class LevelEditor {
             words = words + ".";
           } 
           if (y >= rows -1) {
-            vertical = vertical+1;
             words = words + " ";
 
           }
@@ -59,7 +62,6 @@ class LevelEditor {
           } 
           if (y >= rows -1) {
             words = words + " ";
-            vertical = vertical+1;
           }
         }
 
@@ -71,7 +73,6 @@ class LevelEditor {
           } 
           if (y >= rows -1) {
             words = words + " ";
-            vertical = vertical+1;
           }
         }
 
@@ -83,7 +84,6 @@ class LevelEditor {
           } 
           if (y >= rows -1) {
             words = words + " ";
-            vertical = vertical+1;
           }
         }
         if (board[x][y] == 5) {
@@ -94,7 +94,7 @@ class LevelEditor {
           } 
           if (y >= rows -1) {
             words = words + " ";
-            vertical = vertical+1;
+
           }
         }        
         if (board[x][y] == 6) {
@@ -105,18 +105,14 @@ class LevelEditor {
           } 
           if (y >= rows -1) {
             words = words + " ";
-            vertical = vertical+1;
           }
         }                
-
-//        if (vertical == 19) {
-
-//          String[] list = split(words, ' ');
- //         saveStrings("data/levels/10.txt", list);
-  //      }
       }
     }
   }
+  
+
+//Detects if the mouse is on the grid 
   void mouseOnGrid() {
     if (mouseX<= width-121) {
       if (mouseX>= 0) {
@@ -137,8 +133,8 @@ class LevelEditor {
     }
   }
 
+//Places the selected block onto the grid
   void placeBlock() {
-
     mouseOnGrid();
     if (onGrid == true) {
       if (mousePressed == true) {
@@ -148,7 +144,7 @@ class LevelEditor {
     }
   }
 
-
+//If the save button is clicked, saves to the txt fiel
   void saveButton() {
     if (saveOnce == false) {
       if (save == true) {

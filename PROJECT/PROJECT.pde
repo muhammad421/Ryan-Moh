@@ -63,16 +63,24 @@ void setup() {
 
 void draw() {
   mCoin.onCoin();
-  if (state == 0||state==6) {
+  
+//Mainmenu
+  if (state == 0) {
 
     homeScreen.menu();
   }
+  
+//Death screen
   if (state == 2) {
     dead();
   }
+  
+//Instructions page  
   if (state == 3) {
 instructions();
   }
+  
+//Main game loops
   if ((state == 1)&& (gpaused == false)) {
     display();
 
@@ -91,8 +99,10 @@ instructions();
 
     mBrick.marioHittingBrick();
   }
+  
+//Level editor display  
   if (state == 4) {
-    image(mainScreen, 0, 0, width, height);
+    background(#3FBFFF);
     saveButton.Draw();
     loadButton.Draw();
     saveButton.clicked();
@@ -120,12 +130,13 @@ instructions();
     levelEdit.saveButton();
   }
 
+//Pause menu
   if ((gpaused == true)&& (state == 1)) {
     pause();
   }
 }
 
-//moves Mario
+//Moves Mario
 void keyPressed() {
   mario.keypressed();
   if (key == 'p' || key == 'P') {
@@ -149,6 +160,8 @@ void initializeValues() {
   font = createFont("joystik.ttf", 20);
   gpaused = false;
 
+
+// UNSLASH TO PLAY MUSIC
   //  music = new SoundFile(this, "song.mp3");
   //  music.loop();
 
@@ -158,6 +171,7 @@ void initializeValues() {
   loadImages();
   
   state = 0;
+  
   mario = new Mario();
   goomba1 = new Goomba();
   homeScreen = new Mainmenu();
@@ -181,6 +195,7 @@ void initializeValues() {
   blockS = new BlockSelect(brick, 630, 250, 30, 30, 6);
 }
 
+//Draws the pause loop
 void pause() {
   fill(200, 200, 200, 1);
   rect(0, 0, width, height);
@@ -202,9 +217,7 @@ void instructions() {
 
 }
 
-//Pause and start screen
-
-
+//Draws the death screen
 void dead() {
   image(deathScreen, 0, 0, width, height);
   textFont(font);
