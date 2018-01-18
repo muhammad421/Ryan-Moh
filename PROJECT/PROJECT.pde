@@ -1,4 +1,4 @@
-//WMCI COMPSCI 20
+//WMCI COMPSCI 30
 //January 18th 2018
 //MARIO PLATFORMER
 //Muhammad Haris && Ryan McMurtry
