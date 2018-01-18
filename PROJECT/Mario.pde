@@ -1,4 +1,5 @@
 class Mario {
+  
   //Image
   PImage[]marioWalkingLeft = new PImage[11];
   PImage[]marioWalkingRight = new PImage[11];
@@ -13,6 +14,8 @@ class Mario {
     stillMario2 = loadImage("marioTwo0.png");
     marioCounter = 0;
     marioCounter2 =0;
+    
+    //Animations
     for (int i =0; i<marioWalkingLeft.length; i++) {
       marioWalkingLeft[i] = loadImage("mario"+i+".png");
     }
@@ -20,6 +23,7 @@ class Mario {
       marioWalkingRight[j] = loadImage("marioTwo"+j+".png");
     }
 
+    //Set variables
     falling = false;
     acceleration = 36;
     marioUp = false;
@@ -42,6 +46,7 @@ class Mario {
 
   //Moves Mario
   void move() {
+    
     //mario moving
     if (marioUp == true) {
       jump();
@@ -60,6 +65,7 @@ class Mario {
       isWalkingRight = false;
       isWalkingLeft = true;
     }
+    
     //Goes to next Level if off screen
     nextLevel();
     if (isWalkingLeft == true) {
@@ -105,6 +111,7 @@ class Mario {
       marioCounter = marioCounter % marioWalkingLeft.length;
     }
   }
+  
   void walkingRight() {
     image (marioWalkingRight[marioCounter2], x, y, tileWidth, tileHeight);
     if (frameCount%1 ==0) {

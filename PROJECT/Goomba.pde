@@ -1,8 +1,10 @@
 class Goomba {
-  //where he is and direction facing
+
+  //Variables
+  //Where he is and direction facing
   int  goomX, goomY, goomDirection, goomCounterOne, goomCounterTwo;
 
-  //essentially switches if he spawns or is walking
+  //Essentially switches if he spawns or is walking
   boolean goomWalk, goomSpawn, canSeeGoomba;
 
   //goomba images
@@ -11,6 +13,7 @@ class Goomba {
 
   float acceleration;
 
+  //Constructor
   Goomba() {
     goomX = 600;
     goomY = int (height - 3*tileHeight);
@@ -21,7 +24,7 @@ class Goomba {
     goomCounterOne = 0;
     goomCounterTwo = 0;
     goomSpawn = true;
-        for (int i =0; i<goombaLeft.length; i++) {
+    for (int i =0; i<goombaLeft.length; i++) {
       goombaLeft[i] = loadImage("goomba"+i+".png");
     }
     for (int j =0; j<goombaRight.length; j++) {
@@ -76,6 +79,8 @@ class Goomba {
       acceleration = 36;
     }
   }
+
+  //Detects if the player jumps on the Goomba
   void attacked() {
     if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)) {
       if ((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)) {
@@ -83,11 +88,14 @@ class Goomba {
       }
     }
   }
+
+  //Detects in the Goomba hits and kills the player
   void attacking() {
     if (goomX/tileWidth==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight) {
-state = 2;
+      state = 2;
     }
   }
+
   // causes the goomba to move, and switches between two imgaes
   void enemy() {
 
@@ -104,7 +112,6 @@ state = 2;
       goomDirection = 2;
     }
 
-
     if (goomDirection == 2&&canSeeGoomba == true) {
       image (goombaLeft[goomCounterOne], goomX, goomY, tileWidth, tileHeight);
       if (frameCount%1 ==0) {
@@ -113,17 +120,14 @@ state = 2;
       }
       goomX -=tileWidth/4;
     }
+    
     if (goomX <= 0) {
       goomDirection = 1;
     }
 
     if (goomDirection == 3) {
-        goomSpawn = true;
-        spawn();
+      goomSpawn = true;
+      spawn();
     }
   }
-
-  //causes two images to flipped to create waling animation
-
-  //loads the level to interact with goomba
 }

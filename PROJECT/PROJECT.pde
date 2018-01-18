@@ -1,5 +1,5 @@
 //WMCI COMPSCI 20
-//Dec 5th 2017
+//January 18th 2018
 //MARIO PLATFORMER
 //Muhammad Haris && Ryan McMurtry
 
@@ -12,7 +12,8 @@ String bgImage, levelToLoad;
 boolean gpaused, save, load;
 PFont font;
 
-//UnComment to turn music on.
+//UnComment Lines 17,18 and 158 -162 to play music
+
 //import processing.sound.*;
 //SoundFile music;
 
@@ -49,14 +50,11 @@ Button loadButton;
 Button saveButton;
 Button playagainS;
 Button levelEditor;
-//Sets background and calls on the mario and goomba functions
+
+//Sets values and screensize
 void setup() {
   size(720, 700);  
-
-
-
   initializeValues();
-
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
@@ -140,12 +138,7 @@ instructions();
 void keyPressed() {
   mario.keypressed();
   if (key == 'p' || key == 'P') {
-
     gpaused = !gpaused;
-
-    if (state == 3) {
-      state = 0;
-    }
   }
 }
 
@@ -200,8 +193,8 @@ void pause() {
   fill(200, 200, 200, 1);
   rect(0, 0, width, height);
   fill(0);
-  text("Paused", width/2-70, height/2);
-  text("Press P to unpause", width/2-150, height/2+100);
+  text("Paused", width/2, height/2);
+  text("Press P to unpause", width/2, height/2-100);
 }
 
 //Instruction screen

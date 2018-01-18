@@ -1,12 +1,11 @@
 class RegularBrick{
- 
+  
+  //Variables
   RegularBrick(){
-    
-    
-    
     
   }
   
+  //Displays the brick at the point read from the text file
   void display(int location, int x, int y){
     
       if (location == '#') {
@@ -15,6 +14,7 @@ class RegularBrick{
        
   }
   
+  //Detects if Mario is hitting the block and breaks it if hit fron underneath
   void marioHittingBrick() {
     if (tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)-1]== 'Y') {
       mario.acceleration = 0; 
