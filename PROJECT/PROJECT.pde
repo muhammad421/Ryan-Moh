@@ -147,6 +147,9 @@ void keyPressed() {
   if (key == 'p' || key == 'P') {
     gpaused = !gpaused;
   }
+  if (key == 'm' || key =='M'){
+    state = 0;
+  }
 }
 
 void keyReleased() {
