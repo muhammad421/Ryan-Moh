@@ -97,6 +97,7 @@ class LevelEditor {
 
           }
         }        
+        
         if (board[x][y] == 6) {
           image(brick, y*cellWidth, x*cellHeight, cellWidth, cellHeight);
 
@@ -106,7 +107,18 @@ class LevelEditor {
           if (y >= rows -1) {
             words = words + " ";
           }
-        }                
+        }
+        
+        if (board[x][y] == 7) {
+          image(pole, y*cellWidth, x*cellHeight, cellWidth, cellHeight);
+
+          if (y < rows) {
+            words = words + "F";
+          } 
+          if (y >= rows -1) {
+            words = words + " ";
+          }
+        }  
       }
     }
   }
@@ -144,9 +156,8 @@ class LevelEditor {
     }
   }
 
-//If the save button is clicked, saves to the txt fiel
+//If the save button is clicked, saves to the txt file
   void saveButton() {
-    if (saveOnce == false) {
       if (save == true) {
         println("sadas");
        words = words.substring(0, max(0, words.length() - 1));
@@ -159,7 +170,6 @@ class LevelEditor {
         state =1;
         n = 10;
       }
-    }
   }
 
 

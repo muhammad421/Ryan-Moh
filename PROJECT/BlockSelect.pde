@@ -41,9 +41,12 @@ class BlockSelect {
         if (selectBlock == 5) {
           block = 5;
         }     
-                if (selectBlock == 6) {
+        if (selectBlock == 6) {
           block = 6;
         }      
+        if (selectBlock == 7){
+          block = 7;
+        }
         println("asdad");
       }
     } else {

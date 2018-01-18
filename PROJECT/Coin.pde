@@ -1,12 +1,12 @@
 class Coin {
 
   //Variables
-  int counter, coinCounter;
+  int coinCounter;
   PImage[] coinSpin = new PImage[6];
 
   //Constructors 
   Coin() {
-    counter = 0;
+
     coinCounter = 0; 
     for (int i = 0; i<coinSpin.length; i++) {
       coinSpin[i] = loadImage("coin"+i+".png");

@@ -5,8 +5,8 @@
 
 //Setting global Variables
 char[][] tiles;
-PImage platform, empty, dirt, brick, coin, box, eraser, deathScreen, mainScreen,levelBackground;
-int tilesHigh, tilesWide, x, y, n, block, state;
+PImage platform, empty, dirt, brick, coin, box, eraser, deathScreen, mainScreen, levelBackground, pole;
+int tilesHigh, tilesWide, x, y, n, block, state, counter;
 float tileWidth, tileHeight;
 String bgImage, levelToLoad;
 boolean gpaused, save, load;
@@ -43,6 +43,7 @@ BlockSelect coinS;
 BlockSelect eraserS;
 BlockSelect dirtS;
 BlockSelect blockS;
+BlockSelect poleS;
 
 //Creates the button
 Button backButton;
@@ -61,25 +62,26 @@ void setup() {
 
 void draw() {
   mCoin.onCoin();
-  
-//Mainmenu
+
+  //Mainmenu
   if (state == 0) {
 
     homeScreen.menu();
   }
-  
-//Death screen
+
+  //Death screen
   if (state == 2) {
     dead();
   }
-  
-//Instructions page  
+
+  //Instructions page  
   if (state == 3) {
-instructions();
+    instructions();
   }
-  
-//Main game loops
+
+  //Main game loops
   if ((state == 1)&& (gpaused == false)) {
+    println(counter);
     display();
 
     mCoin.displayPoints();
@@ -97,8 +99,8 @@ instructions();
 
     mBrick.marioHittingBrick();
   }
-  
-//Level editor display  
+
+  //Level editor display  
   if (state == 4) {
     background(#3FBFFF);
     saveButton.Draw();
@@ -113,6 +115,7 @@ instructions();
     eraserS.Draw();
     dirtS.Draw();
     blockS.Draw();
+    poleS.Draw();
 
 
     platformS.clicked();
@@ -121,6 +124,7 @@ instructions();
     eraserS.clicked();
     dirtS.clicked();
     blockS.clicked();
+    poleS.clicked();
 
     levelEdit.makeGrid();
     levelEdit.placeBlock();
@@ -128,7 +132,11 @@ instructions();
     levelEdit.saveButton();
   }
 
-//Pause menu
+  if (state == 5) {
+    levelComplete();
+  }
+
+  //Pause menu
   if ((gpaused == true)&& (state == 1)) {
     pause();
   }
@@ -148,33 +156,34 @@ void keyReleased() {
 
 //loads all the images used 
 void initializeValues() {
-    bgImage = "level_background.png";
+  bgImage = "level_background.png";
 
   font = createFont("joystik.ttf", 20);
   gpaused = false;
 
 
-// UNSLASH TO PLAY MUSIC
+  // UNSLASH TO PLAY MUSIC
   //  music = new SoundFile(this, "song.mp3");
   //  music.loop();
 
   //music = new SoundFile(this, "song.mp3");
   //music.loop();
-  
+
   loadImages();
-  
-  state = 0;
-  
+
+  state = 5;
+  counter = 0;
+
   mario = new Mario();
   goomba1 = new Goomba();
   homeScreen = new Mainmenu();
   mCoin = new Coin();
   mBlock = new Mystery_Block();
   mBrick = new RegularBrick();
+  levelEdit = new LevelEditor();
   loadLevel(mario.n);
 
   playagainS = new Button("Play Again", width/2 - 60, height/2+80, 50, 50, 3);
-  levelEdit = new LevelEditor();
   saveButton = new Button("SAVE", 200, 620, 100, 50, 1);
   loadButton = new Button("LOAD", 400, 620, 100, 50, 2);
   levelEditor = new Button("Level Editor", 580, 580, 100, 20, 4);
@@ -186,6 +195,7 @@ void initializeValues() {
   eraserS = new BlockSelect(eraser, 630, 500, 30, 30, 1);
   dirtS = new BlockSelect(dirt, 630, 50, 30, 30, 5);
   blockS = new BlockSelect(brick, 630, 250, 30, 30, 6);
+  poleS = new BlockSelect(pole, 630, 300, 30, 30, 7);
 }
 
 //Draws the pause loop
@@ -200,14 +210,13 @@ void pause() {
 //Instruction screen
 void instructions() {
   image(deathScreen, 0, 0, width, height);
-    backButton.Draw();
+  backButton.Draw();
   backButton.clicked();
   text("Controls", width/2, 150);
   textSize(20);
   text("WASD - to move", width/2, 250);
   text("P - PAUSE AND UNPAUSE", width/2, 300);
   textSize(32);
-
 }
 
 //Draws the death screen
@@ -220,6 +229,19 @@ void dead() {
 
   textSize(50);
   text("GAMEOVER", width/2, height/2-200);
+}
+
+//Draw the level complete screen
+void levelComplete() {
+  image(deathScreen, 0, 0, width, height);
+  textSize(50);
+  text("LEVEL COMPLETE", width/2, height/2-65);
+
+  textSize(25);
+  text("YOUR SCORE", width/2, height/2-200);
+  text(counter, width/2,height/2-170);
+  playagainS.Draw();
+  playagainS.clicked();
 }
 
 //displays the background and places all the blocks
@@ -244,27 +266,28 @@ void showTile(char location, int x, int y) {
     image(dirt, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'Y') {
     image(brick, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
-  } 
+  } else if (location == 'F') {
+    image(pole, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
+  }
 }
 
 //loads Images
 void loadImages() {
+
   //load background
   levelBackground = loadImage(bgImage);
+  deathScreen = loadImage("deathScreen.jpg");
+  mainScreen = loadImage("mainscreen.jpg");
 
   //load tile images
   platform = loadImage("platform.png");
   empty = loadImage("empty.png");
   dirt = loadImage("dirt.png");
   brick = loadImage("brick.png");
-
   coin = loadImage("coin0.png");
   box = loadImage("box.jpg");
-
-
   eraser = loadImage("Eraser.png");
-  deathScreen = loadImage("deathScreen.jpg");
-  mainScreen = loadImage("mainscreen.jpg");
+  pole = loadImage("Pole.png");
 }
 
 //Loading Levels
