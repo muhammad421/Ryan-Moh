@@ -12,6 +12,7 @@ String bgImage, levelToLoad;
 boolean gpaused, save, load;
 PFont font;
 
+
 //UnComment Lines 17,18 and 158 -162 to play music
 
 //import processing.sound.*;
@@ -236,6 +237,7 @@ void dead() {
 
 //Draw the level complete screen
 void levelComplete() {
+
   image(deathScreen, 0, 0, width, height);
   textSize(50);
   text("LEVEL COMPLETE", width/2, height/2-65);
@@ -245,6 +247,7 @@ void levelComplete() {
   text(counter, width/2,height/2-170);
   playagainS.Draw();
   playagainS.clicked();
+
 }
 
 //displays the background and places all the blocks

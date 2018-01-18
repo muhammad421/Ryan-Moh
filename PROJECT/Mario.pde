@@ -1,3 +1,4 @@
+
 class Mario {
   
   //loads marios Image
@@ -89,6 +90,8 @@ class Mario {
       n++;
       goomba1.goomDirection = 1;
       goomba1.canSeeGoomba = true;
+      goomba1.goomX = 350;
+      goomba1.goomY = 300;
       x= 10;
       loadLevel(n);
     } 

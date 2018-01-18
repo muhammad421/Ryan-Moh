@@ -40,6 +40,7 @@ class Mainmenu {
     }
     if (key == ENTER || key == ENTER) {
       if (shroomLocation == 1) {
+        counter = 0;
         state = 1;
       }
       if (shroomLocation ==2) {

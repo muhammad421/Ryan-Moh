@@ -38,6 +38,7 @@ class LevelEditor {
 //creates and draws the grid filled with the correct blocks 
   void displayGrid() {
     board[19][0] = 4;
+    board[18][0]= 1;
     words = "";
     for (int x=0; x<cols; x++) { 
       for (int y=0; y<rows; y++) {
@@ -150,7 +151,6 @@ class LevelEditor {
     mouseOnGrid();
     if (onGrid == true) {
       if (mousePressed == true) {
-        println("asd");
         board[mouseY/30][mouseX/30] = block;
       }
     }
@@ -158,8 +158,7 @@ class LevelEditor {
 
 //If the save button is clicked, saves to the txt file
   void saveButton() {
-      if (save == true) {
-        println("sadas");
+      if (save == true) { 
        words = words.substring(0, max(0, words.length() - 1));
         String[] list = split(words, ' ');
         saveStrings("data/levels/10.txt", list);
