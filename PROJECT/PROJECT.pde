@@ -218,6 +218,7 @@ void instructions() {
   textSize(20);
   text("WASD - to move", width/2, 250);
   text("P - PAUSE AND UNPAUSE", width/2, 300);
+  text("M - GET TO MAIN MENU", width/2, 400);
   textSize(32);
 }
 

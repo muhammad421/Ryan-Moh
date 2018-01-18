@@ -171,7 +171,7 @@ class Mario {
       falling = true;
     }
     if (tiles[int((x)/tileWidth)][int((y)/tileHeight)]== 'F'){
-      state = 2;
+      state = 5;
       x=0;
       y=630;
     }
