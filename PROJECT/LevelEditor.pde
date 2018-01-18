@@ -25,6 +25,7 @@ class LevelEditor {
       background(0);
       for (int x=0; x<cols; x++) { 
         for (int y=0; y<rows; y++) { 
+          
           board[x][y] = 1;
         }
       }
@@ -32,6 +33,7 @@ class LevelEditor {
     }
   }
   void displayGrid() {
+    board[19][0] = 4;
     words = "";
     for (int x=0; x<cols; x++) { 
       for (int y=0; y<rows; y++) {

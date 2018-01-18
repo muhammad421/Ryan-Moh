@@ -1,6 +1,5 @@
 class RegularBrick{
-  
-  
+ 
   RegularBrick(){
     
     
@@ -23,20 +22,7 @@ class RegularBrick{
        tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)-1] = '.';
       }
     }
-        if (tiles[int(mario.x/tileWidth)+1][int(mario.y/tileHeight)]=='B'||tiles[int(mario.x/tileWidth)+1][int(mario.y/tileHeight)]=='#'||tiles[int(mario.x/tileWidth)+1][int(mario.y/tileHeight)]=='Y'||tiles[int(mario.x/tileWidth)+1][int(mario.y/tileHeight)]=='D') {
-      mario.canGoLeft =false;
-    } else {
-      mario.canGoLeft = true;
-    }
-        if (mario.x/tileWidth>=1) {
-      if (tiles[int(mario.x/tileWidth)-1][int(mario.y/tileHeight)]=='B'||tiles[int(mario.x/tileWidth)-1][int(mario.y/tileHeight)]=='#'||tiles[int(mario.x/tileWidth)-1][int(mario.y/tileHeight)]=='Y'||tiles[int(mario.x/tileWidth)-1][int(mario.y/tileHeight)]=='D') {
-        mario.canGoRight =false;
-      } else {
-        mario.canGoRight = true;
-      }
-    }
   }
-  
   
   
 }
