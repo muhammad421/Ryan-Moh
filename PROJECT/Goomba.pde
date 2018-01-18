@@ -33,7 +33,7 @@ class Goomba {
     acceleration = 36;
   }
 
-  //spawns on the ! in the text file
+  //spawns on the ! in the text file, cannot have more than 1 ! within the text file
   void spawn() {
     if (goomSpawn == true) {
       for (int y = 0; y < tilesHigh; y++) {
@@ -52,9 +52,8 @@ class Goomba {
   }
 
 
-  //allows interaction with the grid from the goomba
+//allows interaction with the grid from the goomba
   void grid() {
-    //println("yes",goomX/tileWidth,goomY/tileHeight);
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight)+1]!='#') {
       gravity();
     }
@@ -71,7 +70,7 @@ class Goomba {
     }
   }
 
-  // gravtiy function, controls the rate the goomba falls
+// gravity function, controls the rate the goomba falls
   void gravity() {
     goomY+=5*3.81;
     if (tiles[int(goomX/tileWidth)][int(goomY/tileHeight+1)]!='.'&&tiles[int(goomX/tileWidth)][int(goomY/tileHeight+1)]!='C') {
@@ -80,7 +79,7 @@ class Goomba {
     }
   }
 
-  //Detects if the player jumps on the Goomba
+//Detects if the player jumps on the Goomba
   void attacked() {
     if ((int(goomX/tileWidth)+1)>(int(mario.x/tileWidth))&&(int(mario.x/tileWidth))>(int(goomX/tileWidth)-1)) {
       if ((int(mario.y/tileHeight)+1)== int(goomY/tileHeight)) {
@@ -89,14 +88,14 @@ class Goomba {
     }
   }
 
-  //Detects in the Goomba hits and kills the player
+//Detects if the Goomba hits and kills the player, only works on the first level
   void attacking() {
     if (goomX/tileWidth==mario.x/tileWidth&&goomY/tileHeight==mario.y/tileHeight) {
       state = 2;
     }
   }
 
-  // causes the goomba to move, and switches between two imgaes
+// causes the goomba to move, and switches between two images
   void enemy() {
 
     if (goomDirection == 1&&canSeeGoomba == true) {

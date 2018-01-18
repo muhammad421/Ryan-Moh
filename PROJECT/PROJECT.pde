@@ -59,7 +59,6 @@ void setup() {
 }
 
 //Moves mario and the Goomba and checks to see what they are colliding with on the grid
-
 void draw() {
   mCoin.onCoin();
 
@@ -81,7 +80,6 @@ void draw() {
 
   //Main game loops
   if ((state == 1)&& (gpaused == false)) {
-    println(counter);
     display();
 
     mCoin.displayPoints();
@@ -132,6 +130,7 @@ void draw() {
     levelEdit.saveButton();
   }
 
+//Displays when you reach the end of the level
   if (state == 5) {
     levelComplete();
   }
@@ -171,7 +170,7 @@ void initializeValues() {
 
   loadImages();
 
-  state = 5;
+  state = 0;
   counter = 0;
 
   mario = new Mario();
@@ -257,9 +256,12 @@ void display() {
 
 //assignes symbols to pictures
 void showTile(char location, int x, int y) {
+  
+  //Allows the objects to use location of symbols
   mCoin.displayCoin(location, int(x*tileWidth), int(y*tileHeight));
   mBlock.display(location, int(x*tileWidth), int(y*tileHeight));
   mBrick.display(location, int(x*tileWidth), int(y*tileHeight));
+  
   if (location == '.') {
     image(empty, x*tileWidth, y*tileHeight, tileWidth, tileHeight);
   } else if (location == 'D') {

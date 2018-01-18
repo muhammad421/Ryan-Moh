@@ -6,14 +6,15 @@ class Coin {
 
   //Constructors 
   Coin() {
-
     coinCounter = 0; 
+    
+    //Calls all images for coin
     for (int i = 0; i<coinSpin.length; i++) {
       coinSpin[i] = loadImage("coin"+i+".png");
     }
   }
 
-  //Detects if Mario is on coin and allows the player to collect it
+//Detects if Mario is on coin and allows the player to collect it
   void onCoin () {
     if (tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)] == 'C') {
       tiles[int(mario.x/tileWidth)][int(mario.y/tileHeight)] = '.';

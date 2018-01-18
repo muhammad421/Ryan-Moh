@@ -20,7 +20,7 @@ class BlockSelect {
     image(image, x, y, w, h);
   }
 
-//Detect which block is selected to be entered into the grid
+//Detects which block is selected to be entered into the grid
   void clicked() {
     if (MouseIsOver() ==true) { 
       w = 35;
@@ -47,7 +47,6 @@ class BlockSelect {
         if (selectBlock == 7){
           block = 7;
         }
-        println("asdad");
       }
     } else {
       w = 30;

@@ -7,6 +7,8 @@ class Mystery_Block {
   //Constructors
   Mystery_Block() {
     blockCounter = 0; 
+    
+    //calls all images for spining block
     for (int i = 0; i<spinBlock.length; i++) {
       spinBlock[i] = loadImage("Block"+i+".png");
     }

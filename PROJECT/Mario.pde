@@ -1,9 +1,11 @@
 class Mario {
   
-  //Image
+  //loads marios Image
   PImage[]marioWalkingLeft = new PImage[11];
   PImage[]marioWalkingRight = new PImage[11];
   PImage stillMario1, stillMario2;
+  
+  //Controls everything about mario, from walking to falling to his size
   float lastMove, delay, fallSpeed, gravity, acceleration;
   int tilesHigh, tilesWide, x, y, n, counter, marioCounter, marioCounter2;
   boolean isWalkingLeft, isWalkingRight, falling, marioUp, marioRight, marioLeft, canGoLeft, canGoRight, facingRight;
@@ -23,7 +25,7 @@ class Mario {
       marioWalkingRight[j] = loadImage("marioTwo"+j+".png");
     }
 
-    //Set variables
+    //intializes all variables
     falling = false;
     acceleration = 36;
     marioUp = false;
@@ -47,7 +49,7 @@ class Mario {
   //Moves Mario
   void move() {
     
-    //mario moving
+    //Mario moving
     if (marioUp == true) {
       jump();
     }
@@ -68,6 +70,8 @@ class Mario {
     
     //Goes to next Level if off screen
     nextLevel();
+    
+    //calls mario animation, and makes it so that where ever mario stops his facing that direction
     if (isWalkingLeft == true) {
       walkingLeft();
     } else if (isWalkingRight == true) {
@@ -79,8 +83,6 @@ class Mario {
     }
   }
 
-
-
   //Determins if you can goto next level
   void nextLevel() {
     if (x >= width-40) {
@@ -89,9 +91,10 @@ class Mario {
       goomba1.canSeeGoomba = true;
       x= 10;
       loadLevel(n);
-    } else if (x <=0&&n!=0) {
+    } 
+    else if (x <=0&&n!=0) {
       x = 2;
-    } else if ( n == 9) {
+    } else if ( n == 10) {
       n = 0;
       loadLevel(n);
     } else if ( n == 0&& x < 0) {
@@ -103,7 +106,7 @@ class Mario {
     }
   }
 
-  //Walking animation
+  //Walking Left animation
   void walkingLeft() {
     image (marioWalkingLeft[marioCounter], x, y, tileWidth, tileHeight);
     if (frameCount%1 ==0) {
@@ -112,6 +115,7 @@ class Mario {
     }
   }
   
+  //Walking Right animation
   void walkingRight() {
     image (marioWalkingRight[marioCounter2], x, y, tileWidth, tileHeight);
     if (frameCount%1 ==0) {
@@ -124,7 +128,8 @@ class Mario {
   void collidingWithGrid() {
     if (tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= '.'
       &&tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= 'C'
-      &&tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= '!') {
+      &&tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= '!'
+      &&tiles[int((x+tileWidth)/tileWidth)][int(y/tileHeight)]!= 'F') {
       canGoLeft = false;
     } else {
       canGoLeft = true;
@@ -132,7 +137,8 @@ class Mario {
     if (int((y-tileHeight)/tileHeight)>=0) {
       if (tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= '.'
         &&tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= 'C'
-        &&tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= '!') {
+        &&tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= '!'
+        &&tiles[int((x)/tileWidth)][int((y-tileHeight)/tileHeight)]!= 'F') {
         acceleration =0;
         falling = true;
       } else {
@@ -142,28 +148,36 @@ class Mario {
     }
     if (tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= '.'
       &&tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= 'C'
-      &&tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= '!') {
+      &&tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= '!'
+      &&tiles[int((x)/tileWidth)][int((y)/tileHeight)]!= 'F') {
       canGoRight = false;
     } else {
       canGoRight = true;
     }
     if (tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'
       &&tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= 'C'
-      &&tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '!') {
+      &&tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '!'
+      &&tiles[int((x)/tileWidth)][int((y+tileHeight)/tileHeight)]!= 'F') {
       falling = false;
     } else {
       falling = true;
     }
     if (tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '.'
       &&tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= 'C'
-      &&tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '!') {
+      &&tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= '!'
+      &&tiles[int((x+tileWidth)/tileWidth)][int((y+tileHeight)/tileHeight)]!= 'F') {
       falling = false;
     } else {
       falling = true;
     }
+    if (tiles[int((x)/tileWidth)][int((y)/tileHeight)]== 'F'){
+      state = 2;
+      x=0;
+      y=630;
+    }
   }
-  //
-  //Allows you to jump
+
+  //Jump functions makes it so you jump but you being to slow down as you reach your peak
   void jump() {
     if (acceleration != 0) {
       y-=acceleration;
@@ -172,7 +186,7 @@ class Mario {
     falling = true;
   }
 
-  //Prevents you from going too high
+  //Prevents you from going too high, as well as prevents you from going through the ground
   void gravity() {
     y+=5*3.81;
     if (tiles[int(x/tileWidth)][int(y/tileHeight+1)]!='.'
@@ -183,9 +197,8 @@ class Mario {
     }
   }
 
-
+ //Moves mario depending on which key you press
   void keypressed() {
-
     if (key == 'w' || key == 'W'&&(falling ==false)) {
       marioUp = true;
     } 
@@ -198,7 +211,6 @@ class Mario {
   }
 
   void keyreleased() {
-
     if (key == 'w' || key == 'W') {
       acceleration = 0;
       marioUp = false;

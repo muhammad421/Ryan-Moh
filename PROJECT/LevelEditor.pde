@@ -3,14 +3,14 @@ class LevelEditor {
 //variables
   int [][] board;
   int cols, rows, cellWidth, cellHeight;
-  boolean clicked, once, onGrid, saveOnce;
+  boolean clicked, once, onGrid;
   char letter;
-  String words = "";  
+  String words;  
 
 
 //Constructor
   LevelEditor() {
-    saveOnce = false;
+    words = "";
     once = false;
     cols = 20;
     rows = 20;
@@ -163,7 +163,6 @@ class LevelEditor {
        words = words.substring(0, max(0, words.length() - 1));
         String[] list = split(words, ' ');
         saveStrings("data/levels/10.txt", list);
-        saveOnce = true;
         save = false;
       }
       if (load == true) {

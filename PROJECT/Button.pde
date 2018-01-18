@@ -1,6 +1,6 @@
 class Button {
-//Local Variables  
   
+//Local Variables  
   String label;
   float x, y, w, h;    
   float selectButton;
@@ -62,7 +62,8 @@ class Button {
          state = 0; 
         }
       }
-    } else {
+    } 
+    else {
       w = 100;
       h = 50;
     }
